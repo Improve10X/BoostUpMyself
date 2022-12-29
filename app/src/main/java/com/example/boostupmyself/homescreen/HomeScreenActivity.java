@@ -1,11 +1,20 @@
-package com.example.boostupmyself;
+package com.example.boostupmyself.homescreen;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 
+import com.example.boostupmyself.CategoriesActivity;
+import com.example.boostupmyself.R;
+import com.example.boostupmyself.SavedVideosActivity;
 import com.example.boostupmyself.databinding.ActivityHomeScreenBinding;
+import com.example.boostupmyself.homescreen.Video;
+import com.example.boostupmyself.homescreen.VideoItemsAdapter;
 
 import java.util.ArrayList;
 
@@ -24,6 +33,27 @@ public class HomeScreenActivity extends AppCompatActivity {
         setupData();
         setupAdapter();
         setupVideoItemRv();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.home_screen_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.categories) {
+            Intent intent = new Intent(this, CategoriesActivity.class);
+            startActivity(intent);
+            return true;
+        } else if (item.getItemId() == R.id.saved_videos) {
+            Intent intent = new Intent(this, SavedVideosActivity.class);
+            startActivity(intent);
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
+        }
     }
 
     private void setupData() {

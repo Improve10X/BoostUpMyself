@@ -1,4 +1,4 @@
-package com.example.boostupmyself;
+package com.example.boostupmyself.homescreen;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;

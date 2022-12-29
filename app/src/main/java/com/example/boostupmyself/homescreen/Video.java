@@ -1,4 +1,4 @@
-package com.example.boostupmyself;
+package com.example.boostupmyself.homescreen;
 
 public class Video {
     public String id;

@@ -15,7 +15,21 @@
         android:theme="@style/Theme.BoostUpMyself"
         tools:targetApi="31">
         <activity
-            android:name=".HomeScreenActivity"
+            android:name=".SavedVideosActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".CategoriesActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".homescreen.HomeScreenActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
