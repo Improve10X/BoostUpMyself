@@ -12,13 +12,12 @@ public class Video {
     public Video() {
     }
 
-    public Video(String title, String imageUrl, String uploadedTime, String channelName, String channelLogoUrl, String youtubeVideoId) {
+    public Video(String title, String imageUrl, String uploadedTime, String channelName, String channelLogoUrl) {
         this.title = title;
         this.imageUrl = imageUrl;
         this.uploadedTime = uploadedTime;
         this.channelName = channelName;
         this.channelLogoUrl = channelLogoUrl;
-        this.youtubeVideoId = youtubeVideoId;
     }
 }
 
