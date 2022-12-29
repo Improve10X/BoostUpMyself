@@ -1,6 +1,7 @@
 package com.example.boostupmyself;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
@@ -20,5 +21,17 @@ public class HomeScreenActivity extends AppCompatActivity {
         binding = ActivityHomeScreenBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         getSupportActionBar().setTitle("Home");
+        setupData();
+        setupVideoItemRv();
+    }
+
+    private void setupData() {
+        videoItemList = new ArrayList<>();
+        Video aptitude = new Video();
+        videoItemList.add(aptitude);
+    }
+
+    private void setupVideoItemRv() {
+        binding.videoItemRv.setLayoutManager(new LinearLayoutManager(this));
     }
 }
