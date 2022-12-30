@@ -4,14 +4,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
+import com.example.boostupmyself.api.VideoService;
+import com.example.boostupmyself.api.VideosApi;
 import com.example.boostupmyself.databinding.ActivityCategoriesBinding;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CategoriesActivity extends AppCompatActivity {
 
-    private ArrayList<Category> categories;
+    private ArrayList<Category> categories = new ArrayList<>();
     ActivityCategoriesBinding binding;
     private CategoriesAdapter categoriesAdapter;
 
@@ -21,15 +29,28 @@ public class CategoriesActivity extends AppCompatActivity {
         binding = ActivityCategoriesBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         getSupportActionBar().setTitle("Categories");
-        setupData();
+        fetchCategories();
         setupCategoriesAdapter();
         setupCategoriesRv();
     }
 
-    private void setupData() {
-        categories = new ArrayList<>();
-        Category category = new Category("https://i.ytimg.com/vi/s5BMcaQsjbM/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCiKGYtTAt37RRIBnJaJQjJOLiT5Q", "Samantha English Speech");
-        categories.add(category);
+    private void fetchCategories() {
+        VideosApi videosApi = new VideosApi();
+        VideoService videoService = videosApi.createVideoService();
+        Call<List<Category>> call = videoService.fetchCategories();
+        call.enqueue(new Callback<List<Category>>() {
+            @Override
+            public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
+                List<Category> categories = response.body();
+                categoriesAdapter.setData(categories);
+            }
+
+            @Override
+            public void onFailure(Call<List<Category>> call, Throwable t) {
+                Toast.makeText(CategoriesActivity.this, "Failed to load the data", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     private void setupCategoriesAdapter() {

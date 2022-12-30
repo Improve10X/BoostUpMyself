@@ -10,12 +10,13 @@ import com.example.boostupmyself.databinding.CategoriesItemBinding;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CategoriesAdapter extends RecyclerView.Adapter<CategoryViewHolder> {
 
-    public ArrayList<Category> categories;
+    public List<Category> categories;
 
-    void setData(ArrayList<Category> categories) {
+    void setData(List<Category> categories) {
         this.categories = categories;
         notifyDataSetChanged();
     }
