@@ -1,8 +1,8 @@
-package com.example.boostupmyself.categories;
+package com.improve10x.boostupmyself.categories;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.boostupmyself.databinding.CategoriesItemBinding;
+import com.improve10x.boostupmyself.databinding.CategoriesItemBinding;
 
 public class CategoryViewHolder extends RecyclerView.ViewHolder {
 

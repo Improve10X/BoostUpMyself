@@ -1,4 +1,4 @@
-package com.example.boostupmyself.categories;
+package com.improve10x.boostupmyself.categories;
 
 public class Category {
     public String id;

@@ -1,7 +1,7 @@
-package com.example.boostupmyself.api;
+package com.improve10x.boostupmyself.api;
 
-import com.example.boostupmyself.categories.Category;
-import com.example.boostupmyself.homescreen.Video;
+import com.improve10x.boostupmyself.categories.Category;
+import com.improve10x.boostupmyself.homescreen.Video;
 
 import java.util.List;
 

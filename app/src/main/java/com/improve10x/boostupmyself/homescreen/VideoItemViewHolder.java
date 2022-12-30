@@ -1,11 +1,8 @@
-package com.example.boostupmyself.homescreen;
+package com.improve10x.boostupmyself.homescreen;
 
-import android.view.View;
-
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.boostupmyself.databinding.HomeScreenItemBinding;
+import com.improve10x.boostupmyself.databinding.HomeScreenItemBinding;
 
 public class VideoItemViewHolder extends RecyclerView.ViewHolder {
 

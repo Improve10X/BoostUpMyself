@@ -1,4 +1,4 @@
-package com.example.boostupmyself.categories;
+package com.improve10x.boostupmyself.categories;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -6,10 +6,9 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.boostupmyself.databinding.CategoriesItemBinding;
+import com.improve10x.boostupmyself.databinding.CategoriesItemBinding;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CategoriesAdapter extends RecyclerView.Adapter<CategoryViewHolder> {

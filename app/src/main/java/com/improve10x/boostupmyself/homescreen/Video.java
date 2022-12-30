@@ -1,4 +1,4 @@
-package com.example.boostupmyself.homescreen;
+package com.improve10x.boostupmyself.homescreen;
 
 import com.google.gson.annotations.SerializedName;
 
