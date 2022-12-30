@@ -1,4 +1,4 @@
-package com.example.boostupmyself;
+package com.improve10x.boostupmyself;
 
 import org.junit.Test;
 

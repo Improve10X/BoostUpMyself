@@ -1,4 +1,4 @@
-package com.example.boostupmyself.api;
+package com.improve10x.boostupmyself.api;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

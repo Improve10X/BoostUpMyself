@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "390377825879",
+    "project_id": "boostupmyself",
+    "storage_bucket": "boostupmyself.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:390377825879:android:1e9d835d687c6a471e6512",
+        "android_client_info": {
+          "package_name": "com.improve10x.boostupmyself"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "390377825879-vk6pb5m7594h40n1srn0cneh14d8ka00.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.improve10x.boostupmyself",
+            "certificate_hash": "4a257a952b980cc8ebc01c7d6367432582eaa71e"
+          }
+        },
+        {
+          "client_id": "390377825879-76levm751p3kmp7gtafjgrs80t088on4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBX0CTtU1GerXsw8maxKb02yvasPNpFdBc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "390377825879-76levm751p3kmp7gtafjgrs80t088on4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,13 +1,14 @@
 plugins {
     id 'com.android.application'
+    id 'com.google.gms.google-services'
 }
 
 android {
-    namespace 'com.example.boostupmyself'
+    namespace 'com.improve10x.boostupmyself'
     compileSdk 32
 
     defaultConfig {
-        applicationId "com.example.boostupmyself"
+        applicationId "com.improve10x.boostupmyself"
         minSdk 21
         targetSdk 32
         versionCode 1
@@ -39,6 +40,10 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.8'
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation platform('com.google.firebase:firebase-bom:31.1.1')
+    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-auth'
+    implementation 'com.firebaseui:firebase-ui-auth:7.2.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'

@@ -1,4 +1,4 @@
-package com.example.boostupmyself.categories;
+package com.improve10x.boostupmyself.categories;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -6,9 +6,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import com.example.boostupmyself.api.VideoService;
-import com.example.boostupmyself.api.VideosApi;
-import com.example.boostupmyself.databinding.ActivityCategoriesBinding;
+import com.improve10x.boostupmyself.api.VideoService;
+import com.improve10x.boostupmyself.api.VideosApi;
+import com.improve10x.boostupmyself.databinding.ActivityCategoriesBinding;
 
 import java.util.ArrayList;
 import java.util.List;

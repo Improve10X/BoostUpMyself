@@ -1,4 +1,4 @@
-package com.example.boostupmyself.homescreen;
+package com.improve10x.boostupmyself.homescreen;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -6,10 +6,9 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.boostupmyself.databinding.HomeScreenItemBinding;
+import com.improve10x.boostupmyself.databinding.HomeScreenItemBinding;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class VideoItemsAdapter extends RecyclerView.Adapter<VideoItemViewHolder> {

@@ -1,4 +1,4 @@
-package com.example.boostupmyself.homescreen;
+package com.improve10x.boostupmyself.homescreen;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,12 +10,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.example.boostupmyself.api.VideoService;
-import com.example.boostupmyself.api.VideosApi;
-import com.example.boostupmyself.categories.CategoriesActivity;
-import com.example.boostupmyself.R;
-import com.example.boostupmyself.SavedVideosActivity;
-import com.example.boostupmyself.databinding.ActivityHomeScreenBinding;
+import com.improve10x.boostupmyself.api.VideoService;
+import com.improve10x.boostupmyself.api.VideosApi;
+import com.improve10x.boostupmyself.categories.CategoriesActivity;
+import com.improve10x.boostupmyself.R;
+import com.improve10x.boostupmyself.SavedVideosActivity;
+import com.improve10x.boostupmyself.databinding.ActivityHomeScreenBinding;
 
 import java.util.ArrayList;
 import java.util.List;
