@@ -1,11 +1,9 @@
-package com.example.boostupmyself;
+package com.example.boostupmyself.categories;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 
 import com.example.boostupmyself.databinding.ActivityCategoriesBinding;
 

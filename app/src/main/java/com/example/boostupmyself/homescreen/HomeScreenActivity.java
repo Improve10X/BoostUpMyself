@@ -9,12 +9,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.example.boostupmyself.CategoriesActivity;
+import com.example.boostupmyself.categories.CategoriesActivity;
 import com.example.boostupmyself.R;
 import com.example.boostupmyself.SavedVideosActivity;
 import com.example.boostupmyself.databinding.ActivityHomeScreenBinding;
-import com.example.boostupmyself.homescreen.Video;
-import com.example.boostupmyself.homescreen.VideoItemsAdapter;
 
 import java.util.ArrayList;
 
