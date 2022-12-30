@@ -8,17 +8,25 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.example.boostupmyself.api.VideoService;
+import com.example.boostupmyself.api.VideosApi;
 import com.example.boostupmyself.categories.CategoriesActivity;
 import com.example.boostupmyself.R;
 import com.example.boostupmyself.SavedVideosActivity;
 import com.example.boostupmyself.databinding.ActivityHomeScreenBinding;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class HomeScreenActivity extends AppCompatActivity {
 
-    private ArrayList<Video> videoItems;
+    private ArrayList<Video> videoItems = new ArrayList<>();
     private ActivityHomeScreenBinding binding;
     private VideoItemsAdapter videoItemsAdapter;
 
@@ -28,7 +36,8 @@ public class HomeScreenActivity extends AppCompatActivity {
         binding = ActivityHomeScreenBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         getSupportActionBar().setTitle("Home");
-        setupData();
+//        setupData();
+        fetchVideos();
         setupAdapter();
         setupVideoItemRv();
     }
@@ -54,11 +63,29 @@ public class HomeScreenActivity extends AppCompatActivity {
         }
     }
 
-    private void setupData() {
-        videoItems = new ArrayList<>();
-        Video english = new Video("Samantha english speech", "https://i.ytimg.com/vi/s5BMcaQsjbM/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCiKGYtTAt37RRIBnJaJQjJOLiT5Q", "3 months ago", "Surya", "https://yt3.ggpht.com/3ErdBd0bg2Qw5rKdqDK-7vPAf0tirRuodlGGZuhZePQcjEu8i5KniCN-EUCBtQkSOy14M26O=s68-c-k-c0x00ffffff-no-rj");
-        videoItems.add(english);
+    private void fetchVideos() {
+        VideosApi videosApi = new VideosApi();
+        VideoService videoService = videosApi.createVideoService();
+        Call<List<Video>> call = videoService.fetchVideos();
+        call.enqueue(new Callback<List<Video>>() {
+            @Override
+            public void onResponse(Call<List<Video>> call, Response<List<Video>> response) {
+                List<Video> videos = response.body();
+                videoItemsAdapter.setData(videos);
+            }
+
+            @Override
+            public void onFailure(Call<List<Video>> call, Throwable t) {
+                Toast.makeText(HomeScreenActivity.this, "Fetch failed", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
+
+//    private void setupData() {
+//        videoItems = new ArrayList<>();
+//        Video english = new Video("Samantha english speech", "https://i.ytimg.com/vi/s5BMcaQsjbM/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCiKGYtTAt37RRIBnJaJQjJOLiT5Q", "3 months ago", "Surya", "https://yt3.ggpht.com/3ErdBd0bg2Qw5rKdqDK-7vPAf0tirRuodlGGZuhZePQcjEu8i5KniCN-EUCBtQkSOy14M26O=s68-c-k-c0x00ffffff-no-rj");
+//        videoItems.add(english);
+//    }
 
     private void setupAdapter() {
         videoItemsAdapter = new VideoItemsAdapter();
