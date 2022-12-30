@@ -10,13 +10,15 @@ import com.example.boostupmyself.databinding.HomeScreenItemBinding;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class VideoItemsAdapter extends RecyclerView.Adapter<VideoItemViewHolder> {
 
-    private ArrayList<Video> videos;
+    private List<Video> videos;
 
-    void setData(ArrayList<Video> videos) {
+    void setData(List<Video> videos) {
         this.videos = videos;
+        notifyDataSetChanged();
     }
 
     @NonNull

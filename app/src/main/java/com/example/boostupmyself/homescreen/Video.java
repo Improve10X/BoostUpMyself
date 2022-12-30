@@ -1,13 +1,16 @@
 package com.example.boostupmyself.homescreen;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Video {
+    @SerializedName("_id")
     public String id;
     public String title;
     public String imageUrl;
     public String uploadedTime;
     public String channelName;
     public String channelLogoUrl;
-    public String youtubeVideoId;
+//    public String youtubeVideoId;
 
     public Video() {
     }
