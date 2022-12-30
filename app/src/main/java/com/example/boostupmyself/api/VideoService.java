@@ -12,4 +12,7 @@ public interface VideoService {
 
     @GET("BoostUpMyself")
     Call<List<Video>> fetchVideos();
+
+    @GET("categoryItem")
+    Call<List<Category>> fetchCategories();
 }
