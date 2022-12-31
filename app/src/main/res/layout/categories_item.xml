@@ -8,14 +8,14 @@
 
     <ImageView
         android:id="@+id/category_img"
-        android:layout_width="409dp"
-        android:layout_height="183dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:adjustViewBounds="true"
         app:srcCompat="@drawable/ic_launcher_background" />
 
     <TextView
         android:id="@+id/category_title"
-        android:layout_width="195dp"
-        android:layout_height="23dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="TextView" />
 </LinearLayout>

@@ -1,11 +1,13 @@
 package com.improve10x.boostupmyself.categories;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.improve10x.boostupmyself.SavedVideosActivity;
 import com.improve10x.boostupmyself.databinding.CategoriesItemBinding;
 import com.squareup.picasso.Picasso;
 
@@ -15,9 +17,15 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoryViewHolder> 
 
     public List<Category> categories;
 
+    public OnItemActionListener onItemActionListener;
+
     void setData(List<Category> categories) {
         this.categories = categories;
         notifyDataSetChanged();
+    }
+
+    void setOnItemActionListener(OnItemActionListener onItemActionListener) {
+        this.onItemActionListener = onItemActionListener;
     }
 
     @NonNull
@@ -33,6 +41,9 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoryViewHolder> 
         Category category = categories.get(position);
         Picasso.get().load(category.categoryImg).into(holder.categoriesItemBinding.categoryImg);
         holder.categoriesItemBinding.categoryTitle.setText(category.categoryTitle);
+        holder.itemView.setOnClickListener(view -> {
+                onItemActionListener.onItemClicked(category);
+        });
     }
 
     @Override
