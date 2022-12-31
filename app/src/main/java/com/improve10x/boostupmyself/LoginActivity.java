@@ -15,6 +15,7 @@ import com.firebase.ui.auth.IdpResponse;
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.improve10x.boostupmyself.homescreen.HomeScreenActivity;
 
 import java.util.Arrays;
 import java.util.List;
@@ -55,6 +56,8 @@ public class LoginActivity extends AppCompatActivity {
             // Successfully signed in
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             // ...
+            Intent intent = new Intent(this, HomeScreenActivity.class);
+            startActivity(intent);
         } else {
             // Sign in failed. If response is null the user canceled the
             // sign-in flow using the back button. Otherwise check
