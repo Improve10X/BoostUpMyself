@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
+import com.improve10x.boostupmyself.homescreen.HomeScreenActivity;
+
 public class SplashActivity extends AppCompatActivity {
 
     @Override
@@ -15,7 +17,7 @@ public class SplashActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         Handler handler = new Handler();
         handler.postDelayed(() -> {
-            Intent intent = new Intent(this, LoginActivity.class);
+            Intent intent = new Intent(this, HomeScreenActivity.class);
             startActivity(intent);
             finish();
         },3000);

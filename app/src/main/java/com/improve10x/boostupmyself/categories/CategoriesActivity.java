@@ -1,9 +1,12 @@
 package com.improve10x.boostupmyself.categories;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.improve10x.boostupmyself.api.VideoService;
@@ -29,9 +32,20 @@ public class CategoriesActivity extends AppCompatActivity {
         binding = ActivityCategoriesBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         getSupportActionBar().setTitle("Categories");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         fetchCategories();
         setupCategoriesAdapter();
         setupCategoriesRv();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == android.R.id.home) {
+            finish();
+            return false;
+        } else {
+            return super.onOptionsItemSelected(item);
+        }
     }
 
     private void fetchCategories() {

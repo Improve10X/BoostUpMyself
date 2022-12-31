@@ -10,6 +10,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.improve10x.boostupmyself.api.VideoService;
 import com.improve10x.boostupmyself.api.VideosApi;
 import com.improve10x.boostupmyself.categories.CategoriesActivity;
@@ -40,6 +44,8 @@ public class HomeScreenActivity extends AppCompatActivity {
         fetchVideos();
         setupAdapter();
         setupVideoItemRv();
+
+
     }
 
     @Override
@@ -64,21 +70,21 @@ public class HomeScreenActivity extends AppCompatActivity {
     }
 
     private void fetchVideos() {
-        VideosApi videosApi = new VideosApi();
-        VideoService videoService = videosApi.createVideoService();
-        Call<List<Video>> call = videoService.fetchVideos();
-        call.enqueue(new Callback<List<Video>>() {
-            @Override
-            public void onResponse(Call<List<Video>> call, Response<List<Video>> response) {
-                List<Video> videos = response.body();
-                videoItemsAdapter.setData(videos);
-            }
-
-            @Override
-            public void onFailure(Call<List<Video>> call, Throwable t) {
-                Toast.makeText(HomeScreenActivity.this, "Fetch failed", Toast.LENGTH_SHORT).show();
-            }
-        });
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("videos")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()) {
+                            List<Video> videos = task.getResult().toObjects(Video.class);
+                            videoItemsAdapter.setData(videos);
+                            Toast.makeText(HomeScreenActivity.this, "Video Size : " + videos.size(), Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(HomeScreenActivity.this, "Failed to get data", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 
 //    private void setupData() {
