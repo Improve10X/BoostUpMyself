@@ -14,6 +14,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.improve10x.boostupmyself.SavedVideosActivity;
 import com.improve10x.boostupmyself.categories.CategoriesActivity;
 import com.improve10x.boostupmyself.R;
 import com.improve10x.boostupmyself.databinding.ActivityHomeScreenBinding;
@@ -54,8 +55,8 @@ public class HomeScreenActivity extends AppCompatActivity {
             startActivity(intent);
             return true;
         } else if (item.getItemId() == R.id.saved_videos) {
-//            Intent intent = new Intent(this, SavedVideoItemsActivity.class);
-//            startActivity(intent);
+            Intent intent = new Intent(this, SavedVideosActivity.class);
+            startActivity(intent);
             return true;
         } else {
             return super.onOptionsItemSelected(item);
