@@ -1,4 +1,4 @@
-package com.improve10x;
+package com.improve10x.boostupmyself;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -6,7 +6,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.improve10x.boostupmyself.databinding.ActivityCategoryNameBinding;
 import com.improve10x.boostupmyself.databinding.CategoryNameItemBinding;
 import com.squareup.picasso.Picasso;
 

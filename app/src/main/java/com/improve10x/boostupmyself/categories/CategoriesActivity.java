@@ -6,11 +6,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.improve10x.boostupmyself.SavedVideosActivity;
+import com.improve10x.boostupmyself.CategoryNameActivity;
 import com.improve10x.boostupmyself.api.VideoService;
 import com.improve10x.boostupmyself.api.VideosApi;
 import com.improve10x.boostupmyself.databinding.ActivityCategoriesBinding;
@@ -76,7 +75,7 @@ public class CategoriesActivity extends AppCompatActivity {
             @Override
             public void onItemClicked(Category category) {
                 Toast.makeText(CategoriesActivity.this, "Clicked", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(CategoriesActivity.this, SavedVideosActivity.class);
+                Intent intent = new Intent(CategoriesActivity.this, CategoryNameActivity.class);
                 startActivity(intent);
             }
         });

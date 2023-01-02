@@ -1,4 +1,4 @@
-package com.improve10x;
+package com.improve10x.boostupmyself;
 
 public class CategoryName {
     public String id;
