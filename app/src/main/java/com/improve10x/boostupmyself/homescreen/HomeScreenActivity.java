@@ -16,7 +16,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.improve10x.boostupmyself.categories.CategoriesActivity;
 import com.improve10x.boostupmyself.R;
-import com.improve10x.boostupmyself.savedvideos.SavedVideoItemsActivity;
 import com.improve10x.boostupmyself.databinding.ActivityHomeScreenBinding;
 
 import java.util.ArrayList;
@@ -55,8 +54,8 @@ public class HomeScreenActivity extends AppCompatActivity {
             startActivity(intent);
             return true;
         } else if (item.getItemId() == R.id.saved_videos) {
-            Intent intent = new Intent(this, SavedVideoItemsActivity.class);
-            startActivity(intent);
+//            Intent intent = new Intent(this, SavedVideoItemsActivity.class);
+//            startActivity(intent);
             return true;
         } else {
             return super.onOptionsItemSelected(item);

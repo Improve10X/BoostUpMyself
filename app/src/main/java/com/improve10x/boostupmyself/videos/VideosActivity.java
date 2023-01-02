@@ -12,15 +12,17 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.improve10x.boostupmyself.databinding.ActivityVideosBinding;
+import com.improve10x.boostupmyself.homescreen.Video;
+import com.improve10x.boostupmyself.homescreen.VideoItemsAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class VideosActivity extends AppCompatActivity {
 
-    public ArrayList<Video> videos;
+    public ArrayList<Video> videos = new ArrayList<>();
     private ActivityVideosBinding binding;
-    private VideosAdapter videosAdapter;
+    private VideoItemsAdapter videoItemsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +45,7 @@ public class VideosActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if(task.isSuccessful()) {
                             List<Video> videos = task.getResult().toObjects(Video.class);
-                            videosAdapter.setData(videos);
+                            videoItemsAdapter.setData(videos);
                             Toast.makeText(VideosActivity.this, "Video Size : " + videos.size(), Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(VideosActivity.this, "Failed to get data", Toast.LENGTH_SHORT).show();
@@ -59,12 +61,12 @@ public class VideosActivity extends AppCompatActivity {
     }
 */
     private void setupCategoryNamesAdapter() {
-        videosAdapter = new VideosAdapter();
-        videosAdapter.setData(videos);
+        videoItemsAdapter = new VideoItemsAdapter();
+        videoItemsAdapter.setData(videos);
     }
 
     private void setupCategoryNameRv() {
-        binding.categoryNameRv.setLayoutManager(new LinearLayoutManager(this));
-        binding.categoryNameRv.setAdapter(videosAdapter);
+        binding.videosRv.setLayoutManager(new LinearLayoutManager(this));
+        binding.videosRv.setAdapter(videoItemsAdapter);
     }
 }
