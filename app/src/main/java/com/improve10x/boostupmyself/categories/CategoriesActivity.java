@@ -4,11 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.improve10x.boostupmyself.SavedVideosActivity;
 import com.improve10x.boostupmyself.api.VideoService;
 import com.improve10x.boostupmyself.api.VideosApi;
 import com.improve10x.boostupmyself.databinding.ActivityCategoriesBinding;
@@ -70,10 +72,18 @@ public class CategoriesActivity extends AppCompatActivity {
     private void setupCategoriesAdapter() {
         categoriesAdapter = new CategoriesAdapter();
         categoriesAdapter.setData(categories);
+        categoriesAdapter.setOnItemActionListener(new OnItemActionListener() {
+            @Override
+            public void onItemClicked(Category category) {
+                Toast.makeText(CategoriesActivity.this, "Clicked", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(CategoriesActivity.this, SavedVideosActivity.class);
+                startActivity(intent);
+            }
+        });
+        binding.categoriesRv.setAdapter(categoriesAdapter);
     }
 
     private void setupCategoriesRv() {
         binding.categoriesRv.setLayoutManager(new LinearLayoutManager(this));
-        binding.categoriesRv.setAdapter(categoriesAdapter);
     }
 }
