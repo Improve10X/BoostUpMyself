@@ -12,7 +12,6 @@ import android.widget.Toast;
 import com.improve10x.boostupmyself.savedvideos.SavedVideoItemsActivity;
 import com.improve10x.boostupmyself.api.VideoService;
 import com.improve10x.boostupmyself.api.VideosApi;
-import com.improve10x.boostupmyself.databinding.ActivityCategoriesBinding;
 
 import java.util.ArrayList;
 import java.util.List;

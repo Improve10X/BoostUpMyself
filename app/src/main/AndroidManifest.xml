@@ -29,6 +29,13 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".videos.VideosActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".categories.CategoriesActivity"
             android:exported="false">
             <meta-data
