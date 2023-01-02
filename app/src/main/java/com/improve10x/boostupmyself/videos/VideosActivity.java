@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -30,10 +31,21 @@ public class VideosActivity extends AppCompatActivity {
         binding = ActivityVideosBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         getSupportActionBar().setTitle("Videos");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //setupData();
         fetchVideos();
         setupCategoryNamesAdapter();
         setupCategoryNameRv();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == android.R.id.home) {
+            finish();
+            return false;
+        } else {
+            return super.onOptionsItemSelected(item);
+        }
     }
 
     private void fetchVideos() {
