@@ -1,6 +1,6 @@
-package com.improve10x.boostupmyself;
+package com.improve10x.boostupmyself.videos;
 
-public class CategoryName {
+public class Video {
     public String id;
     public String title;
     public String imageUrl;
@@ -8,10 +8,10 @@ public class CategoryName {
     public String channelName;
     public String channelLogoUrl;
 
-    public CategoryName() {
+    public Video() {
     }
 
-    public CategoryName(String title, String imageUrl, String uploadedTime, String channelName, String channelLogoUrl) {
+    public Video(String title, String imageUrl, String uploadedTime, String channelName, String channelLogoUrl) {
         this.title = title;
         this.imageUrl = imageUrl;
         this.uploadedTime = uploadedTime;

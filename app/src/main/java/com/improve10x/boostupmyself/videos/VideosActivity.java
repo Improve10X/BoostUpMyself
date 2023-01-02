@@ -1,4 +1,4 @@
-package com.improve10x.boostupmyself;
+package com.improve10x.boostupmyself.videos;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,17 +12,15 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.improve10x.boostupmyself.databinding.ActivityCategoryNameBinding;
-import com.improve10x.boostupmyself.homescreen.HomeScreenActivity;
-import com.improve10x.boostupmyself.homescreen.Video;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategoryNameActivity extends AppCompatActivity {
+public class VideosActivity extends AppCompatActivity {
 
-    public ArrayList<CategoryName> categoryNames;
+    public ArrayList<Video> categoryNames;
     private ActivityCategoryNameBinding binding;
-    private CategoryNamesAdapter categoryNamesAdapter;
+    private VideosAdapter videosAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,11 +42,11 @@ public class CategoryNameActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if(task.isSuccessful()) {
-                            List<CategoryName> categoryNames = task.getResult().toObjects(CategoryName.class);
-                            categoryNamesAdapter.setData(categoryNames);
-                            Toast.makeText(CategoryNameActivity.this, "Video Size : " + categoryNames.size(), Toast.LENGTH_SHORT).show();
+                            List<Video> categoryNames = task.getResult().toObjects(Video.class);
+                            videosAdapter.setData(categoryNames);
+                            Toast.makeText(VideosActivity.this, "Video Size : " + categoryNames.size(), Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(CategoryNameActivity.this, "Failed to get data", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(VideosActivity.this, "Failed to get data", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -61,12 +59,12 @@ public class CategoryNameActivity extends AppCompatActivity {
     }
 */
     private void setupCategoryNamesAdapter() {
-        categoryNamesAdapter = new CategoryNamesAdapter();
-        categoryNamesAdapter.setData(categoryNames);
+        videosAdapter = new VideosAdapter();
+        videosAdapter.setData(categoryNames);
     }
 
     private void setupCategoryNameRv() {
         binding.categoryNameRv.setLayoutManager(new LinearLayoutManager(this));
-        binding.categoryNameRv.setAdapter(categoryNamesAdapter);
+        binding.categoryNameRv.setAdapter(videosAdapter);
     }
 }
