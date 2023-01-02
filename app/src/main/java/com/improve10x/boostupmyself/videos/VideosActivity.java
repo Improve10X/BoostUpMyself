@@ -11,23 +11,23 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.improve10x.boostupmyself.databinding.ActivityCategoryNameBinding;
+import com.improve10x.boostupmyself.databinding.ActivityVideosBinding;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class VideosActivity extends AppCompatActivity {
 
-    public ArrayList<Video> categoryNames;
-    private ActivityCategoryNameBinding binding;
+    public ArrayList<Video> videos;
+    private ActivityVideosBinding binding;
     private VideosAdapter videosAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityCategoryNameBinding.inflate(getLayoutInflater());
+        binding = ActivityVideosBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        getSupportActionBar().setTitle("CategoryName");
+        getSupportActionBar().setTitle("Videos");
         //setupData();
         fetchVideos();
         setupCategoryNamesAdapter();
@@ -36,15 +36,15 @@ public class VideosActivity extends AppCompatActivity {
 
     private void fetchVideos() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("categories")
+        db.collection("videos")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if(task.isSuccessful()) {
-                            List<Video> categoryNames = task.getResult().toObjects(Video.class);
-                            videosAdapter.setData(categoryNames);
-                            Toast.makeText(VideosActivity.this, "Video Size : " + categoryNames.size(), Toast.LENGTH_SHORT).show();
+                            List<Video> videos = task.getResult().toObjects(Video.class);
+                            videosAdapter.setData(videos);
+                            Toast.makeText(VideosActivity.this, "Video Size : " + videos.size(), Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(VideosActivity.this, "Failed to get data", Toast.LENGTH_SHORT).show();
                         }
@@ -60,7 +60,7 @@ public class VideosActivity extends AppCompatActivity {
 */
     private void setupCategoryNamesAdapter() {
         videosAdapter = new VideosAdapter();
-        videosAdapter.setData(categoryNames);
+        videosAdapter.setData(videos);
     }
 
     private void setupCategoryNameRv() {

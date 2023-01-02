@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.improve10x.boostupmyself.databinding.ActivityCategoriesBinding;
 import com.improve10x.boostupmyself.videos.VideosActivity;
 import com.improve10x.boostupmyself.api.VideoService;
 import com.improve10x.boostupmyself.api.VideosApi;

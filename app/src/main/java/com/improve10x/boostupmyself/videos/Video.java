@@ -7,7 +7,6 @@ public class Video {
     public String uploadedTime;
     public String channelName;
     public String channelLogoUrl;
-
     public Video() {
     }
 
