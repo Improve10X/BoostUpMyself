@@ -9,9 +9,10 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.improve10x.boostupmyself.savedvideos.SavedVideoItemsActivity;
+import com.improve10x.boostupmyself.databinding.ActivityCategoriesBinding;
 import com.improve10x.boostupmyself.api.VideoService;
 import com.improve10x.boostupmyself.api.VideosApi;
+import com.improve10x.boostupmyself.videos.VideosActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,17 +65,16 @@ public class CategoriesActivity extends AppCompatActivity {
                 Toast.makeText(CategoriesActivity.this, "Failed to load the data", Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 
-    private void setupCategoriesAdapter() {
+    public void setupCategoriesAdapter() {
         categoriesAdapter = new CategoriesAdapter();
         categoriesAdapter.setData(categories);
         categoriesAdapter.setOnItemActionListener(new OnItemActionListener() {
             @Override
             public void onItemClicked(Category category) {
                 Toast.makeText(CategoriesActivity.this, "Clicked", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(CategoriesActivity.this, SavedVideoItemsActivity.class);
+                Intent intent = new Intent(CategoriesActivity.this, VideosActivity.class);
                 startActivity(intent);
             }
         });

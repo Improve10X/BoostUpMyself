@@ -15,7 +15,7 @@ public class VideoItemsAdapter extends RecyclerView.Adapter<VideoItemViewHolder>
 
     private List<Video> videos;
 
-    void setData(List<Video> videos) {
+    public void setData(List<Video> videos) {
         this.videos = videos;
         notifyDataSetChanged();
     }
