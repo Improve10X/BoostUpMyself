@@ -22,7 +22,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".SavedVideosActivity"
+            android:name=".savedvideos.SavedVideoItemsActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

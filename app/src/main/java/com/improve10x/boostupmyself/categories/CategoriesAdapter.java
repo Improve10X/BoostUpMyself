@@ -1,13 +1,11 @@
 package com.improve10x.boostupmyself.categories;
 
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.improve10x.boostupmyself.SavedVideosActivity;
 import com.improve10x.boostupmyself.databinding.CategoriesItemBinding;
 import com.squareup.picasso.Picasso;
 
