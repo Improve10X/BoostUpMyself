@@ -32,8 +32,7 @@ public class VideosActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         getSupportActionBar().setTitle("Videos");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        //setupData();
-        fetchVideos();
+        getVideos();
         setupCategoryNamesAdapter();
         setupCategoryNameRv();
     }
@@ -48,7 +47,7 @@ public class VideosActivity extends AppCompatActivity {
         }
     }
 
-    private void fetchVideos() {
+    private void getVideos() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("videos")
                 .get()
@@ -66,12 +65,6 @@ public class VideosActivity extends AppCompatActivity {
                 });
     }
 
-  /*  private void setupData() {
-        categoryNames = new ArrayList<>();
-        CategoryName categoryName = new CategoryName("Samantha English Videos", "https://i.ytimg.com/vi/s5BMcaQsjbM/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCiKGYtTAt37RRIBnJaJQjJOLiT5Q", "1 day ago", "English Speeches", "https://yt3.ggpht.com/3ErdBd0bg2Qw5rKdqDK-7vPAf0tirRuodlGGZuhZePQcjEu8i5KniCN-EUCBtQkSOy14M26O=s68-c-k-c0x00ffffff-no-rj");
-        categoryNames.add(categoryName);
-    }
-*/
     private void setupCategoryNamesAdapter() {
         videoItemsAdapter = new VideoItemsAdapter();
         videoItemsAdapter.setData(videos);

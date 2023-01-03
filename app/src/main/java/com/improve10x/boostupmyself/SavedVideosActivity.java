@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -16,7 +15,6 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.improve10x.boostupmyself.databinding.ActivitySavedVideosBinding;
 import com.improve10x.boostupmyself.homescreen.Video;
 import com.improve10x.boostupmyself.homescreen.VideoItemsAdapter;
-import com.improve10x.boostupmyself.videos.VideosActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +32,7 @@ public class SavedVideosActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         getSupportActionBar().setTitle("Saved Videos");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        fetchVideos();
+        getVideos();
         setupVideoItemsAdapter();
         setupSavedVideosRv();
     }
@@ -49,7 +47,7 @@ public class SavedVideosActivity extends AppCompatActivity {
         }
     }
 
-    private void fetchVideos() {
+    private void getVideos() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("videos")
                 .get()
