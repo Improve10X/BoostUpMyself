@@ -2,7 +2,9 @@ package com.improve10x.boostupmyself.homescreen;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Video {
+import java.io.Serializable;
+
+public class Video implements Serializable {
     @SerializedName("_id")
     public String id;
     public String title;

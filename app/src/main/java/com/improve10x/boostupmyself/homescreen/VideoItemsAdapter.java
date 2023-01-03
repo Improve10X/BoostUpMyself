@@ -15,9 +15,15 @@ public class VideoItemsAdapter extends RecyclerView.Adapter<VideoItemViewHolder>
 
     private List<Video> videos;
 
+    public OnItemActionListener onItemActionListener;
+
     public void setData(List<Video> videos) {
         this.videos = videos;
         notifyDataSetChanged();
+    }
+
+    public void setOnItemActionListener(OnItemActionListener onItemActionListener) {
+        this.onItemActionListener = onItemActionListener;
     }
 
     @NonNull
@@ -36,6 +42,9 @@ public class VideoItemsAdapter extends RecyclerView.Adapter<VideoItemViewHolder>
         holder.binding.videoTitleTxt.setText(video.title);
         holder.binding.channelNameTxt.setText(video.channelName);
         holder.binding.uploadedTimeTxt.setText(video.uploadedTime);
+        holder.itemView.setOnClickListener(view -> {
+            onItemActionListener.onItemClicked(video);
+        });
     }
 
     @Override

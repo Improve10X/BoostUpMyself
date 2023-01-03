@@ -14,6 +14,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.improve10x.boostupmyself.Constants;
+import com.improve10x.boostupmyself.PlayVideoActivity;
 import com.improve10x.boostupmyself.SavedVideosActivity;
 import com.improve10x.boostupmyself.categories.CategoriesActivity;
 import com.improve10x.boostupmyself.R;
@@ -34,8 +36,7 @@ public class HomeScreenActivity extends AppCompatActivity {
         binding = ActivityHomeScreenBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         getSupportActionBar().setTitle("Home");
-//        setupData();
-        fetchVideos();
+        getVideos();
         setupAdapter();
         setupVideoItemRv();
 
@@ -63,7 +64,7 @@ public class HomeScreenActivity extends AppCompatActivity {
         }
     }
 
-    private void fetchVideos() {
+    private void getVideos() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("videos")
                 .get()
@@ -81,15 +82,18 @@ public class HomeScreenActivity extends AppCompatActivity {
                 });
     }
 
-//    private void setupData() {
-//        videoItems = new ArrayList<>();
-//        Video english = new Video("Samantha english speech", "https://i.ytimg.com/vi/s5BMcaQsjbM/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCiKGYtTAt37RRIBnJaJQjJOLiT5Q", "3 months ago", "Surya", "https://yt3.ggpht.com/3ErdBd0bg2Qw5rKdqDK-7vPAf0tirRuodlGGZuhZePQcjEu8i5KniCN-EUCBtQkSOy14M26O=s68-c-k-c0x00ffffff-no-rj");
-//        videoItems.add(english);
-//    }
-
     private void setupAdapter() {
         videoItemsAdapter = new VideoItemsAdapter();
         videoItemsAdapter.setData(videoItems);
+        videoItemsAdapter.setOnItemActionListener(new OnItemActionListener() {
+            @Override
+            public void onItemClicked(Video video) {
+                Toast.makeText(HomeScreenActivity.this, "Clicked", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(HomeScreenActivity.this, PlayVideoActivity.class);
+                intent.putExtra(Constants.HOME_SCREEN, video);
+                startActivity(intent);
+            }
+        });
     }
 
     private void setupVideoItemRv() {
