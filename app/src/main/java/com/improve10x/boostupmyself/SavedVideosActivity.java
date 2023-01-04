@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -13,6 +14,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.improve10x.boostupmyself.databinding.ActivitySavedVideosBinding;
+import com.improve10x.boostupmyself.homescreen.HomeScreenActivity;
+import com.improve10x.boostupmyself.homescreen.OnItemActionListener;
 import com.improve10x.boostupmyself.homescreen.Video;
 import com.improve10x.boostupmyself.homescreen.VideoItemsAdapter;
 
@@ -68,6 +71,15 @@ public class SavedVideosActivity extends AppCompatActivity {
     private void setupVideoItemsAdapter() {
         videoItemsAdapter = new VideoItemsAdapter();
         videoItemsAdapter.setData(savedVideos);
+        videoItemsAdapter.setOnItemActionListener(new OnItemActionListener() {
+            @Override
+            public void onItemClicked(Video video) {
+                Toast.makeText(SavedVideosActivity.this, "Clicked", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(SavedVideosActivity.this, PlayVideoActivity.class);
+                intent.putExtra(Constants.HOME_SCREEN, video);
+                startActivity(intent);
+            }
+        });
     }
 
     private void setupSavedVideosRv() {

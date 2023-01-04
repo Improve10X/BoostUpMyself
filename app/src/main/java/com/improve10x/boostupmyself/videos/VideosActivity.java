@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -12,7 +13,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.improve10x.boostupmyself.Constants;
+import com.improve10x.boostupmyself.PlayVideoActivity;
 import com.improve10x.boostupmyself.databinding.ActivityVideosBinding;
+import com.improve10x.boostupmyself.homescreen.HomeScreenActivity;
+import com.improve10x.boostupmyself.homescreen.OnItemActionListener;
 import com.improve10x.boostupmyself.homescreen.Video;
 import com.improve10x.boostupmyself.homescreen.VideoItemsAdapter;
 
@@ -68,6 +73,15 @@ public class VideosActivity extends AppCompatActivity {
     private void setupCategoryNamesAdapter() {
         videoItemsAdapter = new VideoItemsAdapter();
         videoItemsAdapter.setData(videos);
+        videoItemsAdapter.setOnItemActionListener(new OnItemActionListener() {
+            @Override
+            public void onItemClicked(Video video) {
+                Toast.makeText(VideosActivity.this, "Clicked", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(VideosActivity.this, PlayVideoActivity.class);
+                intent.putExtra(Constants.HOME_SCREEN, video);
+                startActivity(intent);
+            }
+        });
     }
 
     private void setupCategoryNameRv() {
