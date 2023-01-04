@@ -12,7 +12,7 @@ public class Video implements Serializable {
     public String uploadedTime;
     public String channelName;
     public String channelLogoUrl;
-//    public String youtubeVideoId;
+    public String youtubeVideoUrl;
 
     public Video() {
     }
