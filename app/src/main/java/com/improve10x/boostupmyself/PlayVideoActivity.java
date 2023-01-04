@@ -55,7 +55,7 @@ public class PlayVideoActivity extends YouTubeBaseActivity {
         binding.youtubePlayerView.initialize(Constants.YOUTUBE_API_KEY, new YouTubePlayer.OnInitializedListener() {
             @Override
             public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
-                youTubePlayer.loadVideo(video.youtubeVideoUrl);
+                youTubePlayer.loadVideo(video.youtubeVideoId);
                 youTubePlayer.play();
             }
 
