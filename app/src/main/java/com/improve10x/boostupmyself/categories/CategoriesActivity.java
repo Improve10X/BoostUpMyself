@@ -9,9 +9,15 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.improve10x.boostupmyself.databinding.ActivityCategoriesBinding;
 import com.improve10x.boostupmyself.api.VideoService;
 import com.improve10x.boostupmyself.api.VideosApi;
+import com.improve10x.boostupmyself.homescreen.HomeScreenActivity;
+import com.improve10x.boostupmyself.homescreen.Video;
 import com.improve10x.boostupmyself.videos.VideosActivity;
 
 import java.util.ArrayList;
@@ -34,7 +40,7 @@ public class CategoriesActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         getSupportActionBar().setTitle("Categories");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        fetchCategories();
+        getCategories();
         setupCategoriesAdapter();
         setupCategoriesRv();
     }
@@ -49,23 +55,23 @@ public class CategoriesActivity extends AppCompatActivity {
         }
     }
 
-    private void fetchCategories() {
-        VideosApi videosApi = new VideosApi();
-        VideoService videoService = videosApi.createVideoService();
-        Call<List<Category>> call = videoService.fetchCategories();
-        call.enqueue(new Callback<List<Category>>() {
-            @Override
-            public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
-                List<Category> categories = response.body();
-                categoriesAdapter.setData(categories);
+    private void getCategories() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("categories")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()) {
+                            List<Category> categories = task.getResult().toObjects(Category.class);
+                            categoriesAdapter.setData(categories);
+                            Toast.makeText(CategoriesActivity.this, "Category Size : " + categories.size(), Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(CategoriesActivity.this, "Failed to get data", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
             }
-
-            @Override
-            public void onFailure(Call<List<Category>> call, Throwable t) {
-                Toast.makeText(CategoriesActivity.this, "Failed to load the data", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
 
     public void setupCategoriesAdapter() {
         categoriesAdapter = new CategoriesAdapter();
