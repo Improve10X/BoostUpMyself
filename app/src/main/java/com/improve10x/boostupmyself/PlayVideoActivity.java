@@ -32,8 +32,6 @@ public class PlayVideoActivity extends YouTubeBaseActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityPlayVideoBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-//        getSupportActionBar().setTitle("Play video");
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Intent intent = getIntent();
         intent.hasExtra(Constants.HOME_SCREEN);
         video = (Video) intent.getSerializableExtra(Constants.HOME_SCREEN);
@@ -41,16 +39,6 @@ public class PlayVideoActivity extends YouTubeBaseActivity {
         setupYouTubePlayerView();
     }
 
-
-    //    @Override
-//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//        if(item.getItemId() == android.R.id.home) {
-//            finish();
-//            return true;
-//        } else {
-//            return super.onOptionsItemSelected(item);
-//        }
-//    }
     private void setupYouTubePlayerView() {
         binding.youtubePlayerView.initialize(Constants.YOUTUBE_API_KEY, new YouTubePlayer.OnInitializedListener() {
             @Override
@@ -68,7 +56,6 @@ public class PlayVideoActivity extends YouTubeBaseActivity {
 
 
     private void showData() {
-//        Picasso.get().load(video.imageUrl).into(binding.videoImg);
         Picasso.get().load(video.channelLogoUrl).into(binding.channelLogoImg);
         binding.videoTitleTxt.setText(video.title);
         binding.channelNameTxt.setText(video.channelName);
