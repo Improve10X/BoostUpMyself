@@ -13,6 +13,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.improve10x.boostupmyself.Constants;
 import com.improve10x.boostupmyself.databinding.ActivityCategoriesBinding;
 import com.improve10x.boostupmyself.api.VideoService;
 import com.improve10x.boostupmyself.api.VideosApi;
@@ -32,6 +33,7 @@ public class CategoriesActivity extends AppCompatActivity {
     private ArrayList<Category> categories = new ArrayList<>();
     ActivityCategoriesBinding binding;
     private CategoriesAdapter categoriesAdapter;
+    private Video video;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,9 @@ public class CategoriesActivity extends AppCompatActivity {
         binding = ActivityCategoriesBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         getSupportActionBar().setTitle("Categories");
+        Intent intent = getIntent();
+        intent.hasExtra(Constants.HOME_SCREEN);
+        video = (Video) intent.getSerializableExtra(Constants.HOME_SCREEN);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getCategories();
         setupCategoriesAdapter();
@@ -81,6 +86,7 @@ public class CategoriesActivity extends AppCompatActivity {
             public void onItemClicked(Category category) {
                 Toast.makeText(CategoriesActivity.this, "Clicked", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(CategoriesActivity.this, VideosActivity.class);
+                intent.putExtra(Constants.HOME_SCREEN, video);
                 startActivity(intent);
             }
         });

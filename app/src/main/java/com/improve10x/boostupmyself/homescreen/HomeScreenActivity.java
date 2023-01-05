@@ -22,6 +22,7 @@ import com.improve10x.boostupmyself.SavedVideosActivity;
 import com.improve10x.boostupmyself.categories.CategoriesActivity;
 import com.improve10x.boostupmyself.R;
 import com.improve10x.boostupmyself.databinding.ActivityHomeScreenBinding;
+import com.improve10x.boostupmyself.videos.VideosActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -102,9 +103,16 @@ public class HomeScreenActivity extends AppCompatActivity {
             @Override
             public void onItemClicked(Video video) {
                 Toast.makeText(HomeScreenActivity.this, "Clicked", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(HomeScreenActivity.this, PlayVideoActivity.class);
-                intent.putExtra(Constants.HOME_SCREEN, video);
-                startActivity(intent);
+                if (video != null) {
+                    Intent intent = new Intent(HomeScreenActivity.this, PlayVideoActivity.class);
+                    intent.putExtra(Constants.HOME_SCREEN, video);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(HomeScreenActivity.this, VideosActivity.class);
+                    intent.putExtra(Constants.HOME_SCREEN, video);
+                    startActivity(intent);
+                }
+
             }
         });
     }

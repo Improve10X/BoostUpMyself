@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.improve10x.boostupmyself.Constants;
@@ -29,6 +31,7 @@ public class VideosActivity extends AppCompatActivity {
     public ArrayList<Video> videos = new ArrayList<>();
     private ActivityVideosBinding binding;
     private VideoItemsAdapter videoItemsAdapter;
+    private Video video;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,9 @@ public class VideosActivity extends AppCompatActivity {
         binding = ActivityVideosBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         getSupportActionBar().setTitle("Videos");
+        Intent intent = getIntent();
+        intent.hasExtra(Constants.HOME_SCREEN);
+        video = (Video) intent.getSerializableExtra(Constants.HOME_SCREEN);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getVideos();
         setupCategoryNamesAdapter();
@@ -54,7 +60,9 @@ public class VideosActivity extends AppCompatActivity {
 
     private void getVideos() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
+//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         db.collection("videos")
+                .whereEqualTo("categoryId", video.categoryId)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -77,9 +85,11 @@ public class VideosActivity extends AppCompatActivity {
             @Override
             public void onItemClicked(Video video) {
                 Toast.makeText(VideosActivity.this, "Clicked", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(VideosActivity.this, PlayVideoActivity.class);
-                intent.putExtra(Constants.HOME_SCREEN, video);
-                startActivity(intent);
+                if (video != null) {
+                    Intent intent = new Intent(VideosActivity.this, PlayVideoActivity.class);
+                    intent.putExtra(Constants.HOME_SCREEN, video);
+                    startActivity(intent);
+                }
             }
         });
     }
