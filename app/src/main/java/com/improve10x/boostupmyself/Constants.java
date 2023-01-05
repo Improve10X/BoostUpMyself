@@ -6,4 +6,6 @@ public class Constants {
 
     public static final String YOUTUBE_API_KEY = "AIzaSyCGghz06iinmrwqrNYK8VlG7jmOjr3KxEs";
 
+    public static final String CATEGORY_ID = "CategoryId";
+
 }

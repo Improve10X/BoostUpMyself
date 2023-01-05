@@ -107,11 +107,11 @@ public class HomeScreenActivity extends AppCompatActivity {
                     Intent intent = new Intent(HomeScreenActivity.this, PlayVideoActivity.class);
                     intent.putExtra(Constants.HOME_SCREEN, video);
                     startActivity(intent);
-                } else {
+                } /*else {
                     Intent intent = new Intent(HomeScreenActivity.this, VideosActivity.class);
                     intent.putExtra(Constants.HOME_SCREEN, video);
                     startActivity(intent);
-                }
+                }*/
 
             }
         });
