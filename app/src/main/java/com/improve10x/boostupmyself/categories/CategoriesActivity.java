@@ -42,8 +42,8 @@ public class CategoriesActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         getSupportActionBar().setTitle("Categories");
         Intent intent = getIntent();
-        intent.hasExtra(Constants.HOME_SCREEN);
-        video = (Video) intent.getSerializableExtra(Constants.HOME_SCREEN);
+        intent.hasExtra(Constants.CATEGORY_ID);
+        video = (Video) intent.getSerializableExtra(Constants.CATEGORY_ID);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getCategories();
         setupCategoriesAdapter();
@@ -86,7 +86,7 @@ public class CategoriesActivity extends AppCompatActivity {
             public void onItemClicked(Category category) {
                 Toast.makeText(CategoriesActivity.this, "Clicked", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(CategoriesActivity.this, VideosActivity.class);
-                intent.putExtra(Constants.HOME_SCREEN, video);
+                intent.putExtra(Constants.CATEGORY_ID, category);
                 startActivity(intent);
             }
         });

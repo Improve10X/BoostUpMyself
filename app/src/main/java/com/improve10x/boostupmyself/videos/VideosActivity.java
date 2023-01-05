@@ -17,6 +17,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.improve10x.boostupmyself.Constants;
 import com.improve10x.boostupmyself.PlayVideoActivity;
+import com.improve10x.boostupmyself.categories.Category;
 import com.improve10x.boostupmyself.databinding.ActivityVideosBinding;
 import com.improve10x.boostupmyself.homescreen.HomeScreenActivity;
 import com.improve10x.boostupmyself.homescreen.OnItemActionListener;
@@ -31,7 +32,7 @@ public class VideosActivity extends AppCompatActivity {
     public ArrayList<Video> videos = new ArrayList<>();
     private ActivityVideosBinding binding;
     private VideoItemsAdapter videoItemsAdapter;
-    private Video video;
+    private Category category;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +41,8 @@ public class VideosActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         getSupportActionBar().setTitle("Videos");
         Intent intent = getIntent();
-        intent.hasExtra(Constants.HOME_SCREEN);
-        video = (Video) intent.getSerializableExtra(Constants.HOME_SCREEN);
+        intent.hasExtra(Constants.CATEGORY_ID);
+        category = (Category) intent.getSerializableExtra(Constants.CATEGORY_ID);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getVideos();
         setupCategoryNamesAdapter();
@@ -62,7 +63,7 @@ public class VideosActivity extends AppCompatActivity {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 //        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         db.collection("videos")
-                .whereEqualTo("categoryId", video.categoryId)
+                .whereEqualTo("categoryId", category.categoryId)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -85,12 +86,10 @@ public class VideosActivity extends AppCompatActivity {
             @Override
             public void onItemClicked(Video video) {
                 Toast.makeText(VideosActivity.this, "Clicked", Toast.LENGTH_SHORT).show();
-                if (video != null) {
                     Intent intent = new Intent(VideosActivity.this, PlayVideoActivity.class);
                     intent.putExtra(Constants.HOME_SCREEN, video);
                     startActivity(intent);
                 }
-            }
         });
     }
 
