@@ -42,8 +42,6 @@ public class HomeScreenActivity extends AppCompatActivity {
         getVideos();
         setupAdapter();
         setupVideoItemRv();
-
-
     }
 
     @Override
@@ -85,7 +83,7 @@ public class HomeScreenActivity extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if(task.isSuccessful()) {
+                        if (task.isSuccessful()) {
                             List<Video> videos = task.getResult().toObjects(Video.class);
                             videoItemsAdapter.setData(videos);
                             Toast.makeText(HomeScreenActivity.this, "Video Size : " + videos.size(), Toast.LENGTH_SHORT).show();
@@ -107,12 +105,7 @@ public class HomeScreenActivity extends AppCompatActivity {
                     Intent intent = new Intent(HomeScreenActivity.this, PlayVideoActivity.class);
                     intent.putExtra(Constants.HOME_SCREEN, video);
                     startActivity(intent);
-                } /*else {
-                    Intent intent = new Intent(HomeScreenActivity.this, VideosActivity.class);
-                    intent.putExtra(Constants.HOME_SCREEN, video);
-                    startActivity(intent);
-                }*/
-
+                }
             }
         });
     }
