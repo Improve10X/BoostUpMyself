@@ -9,8 +9,11 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnCompleteListener;import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.improve10x.boostupmyself.databinding.ActivitySavedVideosBinding;
@@ -27,6 +30,7 @@ public class SavedVideosActivity extends AppCompatActivity {
     private ArrayList<Video> savedVideos = new ArrayList<>();
     private VideoItemsAdapter videoItemsAdapter;
     private ActivitySavedVideosBinding binding;
+    private Video video;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +39,11 @@ public class SavedVideosActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         getSupportActionBar().setTitle("Saved Videos");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Intent intent = getIntent();
+        intent.hasExtra(Constants.HOME_SCREEN);
+        video = (Video) intent.getSerializableExtra(Constants.HOME_SCREEN);
         getVideos();
+//        setSavedVideos(video);
         setupVideoItemsAdapter();
         setupSavedVideosRv();
     }
@@ -52,7 +60,8 @@ public class SavedVideosActivity extends AppCompatActivity {
 
     private void getVideos() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("videos")
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        db.collection("/users/" + user.getUid() + "/savedVideo")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -79,7 +88,11 @@ public class SavedVideosActivity extends AppCompatActivity {
                 intent.putExtra(Constants.HOME_SCREEN, video);
                 startActivity(intent);
             }
-        });
+
+            @Override
+            public void onItemSave(Video video) {
+            }
+    });
     }
 
     private void setupSavedVideosRv() {

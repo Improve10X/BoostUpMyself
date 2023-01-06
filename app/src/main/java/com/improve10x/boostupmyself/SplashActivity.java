@@ -23,10 +23,10 @@ public class SplashActivity extends AppCompatActivity {
             if (user != null) {
                 Intent intent = new Intent(this, HomeScreenActivity.class);
                 startActivity(intent);
+                finish();
             } else {
                 Intent intent = new Intent(this, LoginActivity.class);
                 startActivity(intent);
-                finish();
             }
         },3000);
     }
