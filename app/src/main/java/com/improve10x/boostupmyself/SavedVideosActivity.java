@@ -43,7 +43,6 @@ public class SavedVideosActivity extends AppCompatActivity {
         intent.hasExtra(Constants.HOME_SCREEN);
         video = (Video) intent.getSerializableExtra(Constants.HOME_SCREEN);
         getVideos();
-//        setSavedVideos(video);
         setupVideoItemsAdapter();
         setupSavedVideosRv();
     }
@@ -61,7 +60,7 @@ public class SavedVideosActivity extends AppCompatActivity {
     private void getVideos() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        db.collection("/users/" + user.getUid() + "/savedVideo")
+        db.collection("/users/" + user.getUid() + "/savedVideos")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

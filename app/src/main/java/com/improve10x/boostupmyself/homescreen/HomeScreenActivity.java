@@ -48,7 +48,6 @@ public class HomeScreenActivity extends AppCompatActivity {
         getVideos();
         setupAdapter();
         setupVideoItemRv();
-        setSavedVideo(video);
     }
 
     @Override
@@ -102,10 +101,11 @@ public class HomeScreenActivity extends AppCompatActivity {
     }
 
     private void setSavedVideo(Video video) {
-        video.bookmark = "Saved";
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        db.collection("/users/" + user.getUid() + "/savedVideos").document(video.id)
+        video.id = db.collection("/users/" + user.getUid() + "/savedVideos").document().getId();
+        db.collection("/users/" + user.getUid() + "/savedVideos")
+                .document(video.id)
                 .set(video)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -135,13 +135,7 @@ public class HomeScreenActivity extends AppCompatActivity {
 
             @Override
             public void onItemSave(Video video) {
-                ImageButton saveImgBtn = findViewById(R.id.save_img_btn);
-                saveImgBtn.setOnClickListener(view -> {
-                    Toast.makeText(HomeScreenActivity.this, "Clicked", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(HomeScreenActivity.this, SavedVideosActivity.class);
-                    intent.putExtra(Constants.HOME_SCREEN, video);
-                    startActivity(intent);
-                });
+               setSavedVideo(video);
             }
         });
     }

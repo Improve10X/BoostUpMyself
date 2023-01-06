@@ -37,8 +37,12 @@ public class VideoItemsAdapter extends RecyclerView.Adapter<VideoItemViewHolder>
     @Override
     public void onBindViewHolder(@NonNull VideoItemViewHolder holder, int position) {
         Video video = videos.get(position);
-        Picasso.get().load(video.imageUrl).into(holder.binding.videoImg);
-        Picasso.get().load(video.channelLogoUrl).into(holder.binding.channelLogoImg);
+        if (video.imageUrl != null && video.imageUrl.isEmpty() == false) {
+            Picasso.get().load(video.imageUrl).into(holder.binding.videoImg);
+        }
+        if (video.channelLogoUrl != null && video.channelLogoUrl.isEmpty() == false) {
+            Picasso.get().load(video.channelLogoUrl).into(holder.binding.channelLogoImg);
+        }
         holder.binding.videoTitleTxt.setText(video.title);
         holder.binding.channelNameTxt.setText(video.channelName);
         holder.binding.uploadedTimeTxt.setText(video.uploadedTime);
