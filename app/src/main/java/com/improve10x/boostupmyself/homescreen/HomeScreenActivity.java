@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
@@ -100,12 +101,20 @@ public class HomeScreenActivity extends AppCompatActivity {
         videoItemsAdapter.setOnItemActionListener(new OnItemActionListener() {
             @Override
             public void onItemClicked(Video video) {
-                Toast.makeText(HomeScreenActivity.this, "Clicked", Toast.LENGTH_SHORT).show();
-                if (video != null) {
-                    Intent intent = new Intent(HomeScreenActivity.this, PlayVideoActivity.class);
+                Intent intent = new Intent(HomeScreenActivity.this, PlayVideoActivity.class);
+                intent.putExtra(Constants.HOME_SCREEN, video);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onItemSave(Video video) {
+                ImageButton saveImgBtn = findViewById(R.id.save_img_btn);
+                saveImgBtn.setOnClickListener(view -> {
+                    Toast.makeText(HomeScreenActivity.this, "Clicked", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(HomeScreenActivity.this, SavedVideosActivity.class);
                     intent.putExtra(Constants.HOME_SCREEN, video);
                     startActivity(intent);
-                }
+                });
             }
         });
     }

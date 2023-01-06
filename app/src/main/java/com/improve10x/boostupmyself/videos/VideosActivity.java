@@ -17,6 +17,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.improve10x.boostupmyself.Constants;
 import com.improve10x.boostupmyself.PlayVideoActivity;
+import com.improve10x.boostupmyself.SavedVideosActivity;
 import com.improve10x.boostupmyself.categories.Category;
 import com.improve10x.boostupmyself.databinding.ActivityVideosBinding;
 import com.improve10x.boostupmyself.homescreen.HomeScreenActivity;
@@ -86,11 +87,16 @@ public class VideosActivity extends AppCompatActivity {
             @Override
             public void onItemClicked(Video video) {
                 Toast.makeText(VideosActivity.this, "Clicked", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(VideosActivity.this, PlayVideoActivity.class);
-                    intent.putExtra(Constants.HOME_SCREEN, video);
-                    startActivity(intent);
-                }
-        });
+                Intent intent = new Intent(VideosActivity.this, PlayVideoActivity.class);
+                intent.putExtra(Constants.HOME_SCREEN, video);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onItemSave(Video video) {
+
+            }
+    });
     }
 
     private void setupCategoryNameRv() {
