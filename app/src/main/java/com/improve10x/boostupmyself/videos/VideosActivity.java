@@ -10,6 +10,8 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -62,7 +64,6 @@ public class VideosActivity extends AppCompatActivity {
 
     private void getVideos() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         db.collection("videos")
                 .whereEqualTo("categoryId", category.categoryId)
                 .get()
@@ -76,6 +77,28 @@ public class VideosActivity extends AppCompatActivity {
                         } else {
                             Toast.makeText(VideosActivity.this, "Failed to get data", Toast.LENGTH_SHORT).show();
                         }
+                    }
+                });
+    }
+
+    private void setSavedVideo(Video video) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        video.id = db.collection("/users/" + user.getUid() + "/savedVideos").document().getId();
+        db.collection("/users/" + user.getUid() + "/savedVideos")
+                .document(video.id)
+                .set(video)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Toast.makeText(VideosActivity.this, "Successfully added video", Toast.LENGTH_SHORT).show();
+                        getVideos();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(VideosActivity.this, "Failed to add Video", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -94,7 +117,7 @@ public class VideosActivity extends AppCompatActivity {
 
             @Override
             public void onItemSave(Video video) {
-
+                setSavedVideo(video);
             }
     });
     }
