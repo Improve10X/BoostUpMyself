@@ -13,7 +13,11 @@ import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.improve10x.boostupmyself.Constants;
@@ -33,6 +37,7 @@ public class HomeScreenActivity extends AppCompatActivity {
     private ArrayList<Video> videoItems = new ArrayList<>();
     private ActivityHomeScreenBinding binding;
     private VideoItemsAdapter videoItemsAdapter;
+    private Video video;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +48,7 @@ public class HomeScreenActivity extends AppCompatActivity {
         getVideos();
         setupAdapter();
         setupVideoItemRv();
+        setSavedVideo(video);
     }
 
     @Override
@@ -91,6 +97,27 @@ public class HomeScreenActivity extends AppCompatActivity {
                         } else {
                             Toast.makeText(HomeScreenActivity.this, "Failed to get data", Toast.LENGTH_SHORT).show();
                         }
+                    }
+                });
+    }
+
+    private void setSavedVideo(Video video) {
+        video.bookmark = "Saved";
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        db.collection("/users/" + user.getUid() + "/savedVideos").document(video.id)
+                .set(video)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Toast.makeText(HomeScreenActivity.this, "Successfully added video", Toast.LENGTH_SHORT).show();
+                        getVideos();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(HomeScreenActivity.this, "Failed to add Video", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
