@@ -9,7 +9,8 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -65,7 +66,7 @@ public class SavedVideosActivity extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if(task.isSuccessful()) {
+                        if (task.isSuccessful()) {
                             List<Video> videos = task.getResult().toObjects(Video.class);
                             videoItemsAdapter.setData(videos);
                             Toast.makeText(SavedVideosActivity.this, "Video Size : " + videos.size(), Toast.LENGTH_SHORT).show();
@@ -91,7 +92,7 @@ public class SavedVideosActivity extends AppCompatActivity {
             @Override
             public void onItemSave(Video video) {
             }
-    });
+        });
     }
 
     private void setupSavedVideosRv() {

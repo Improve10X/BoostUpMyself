@@ -54,7 +54,6 @@ public class PlayVideoActivity extends YouTubeBaseActivity {
         });
     }
 
-
     private void showData() {
         Picasso.get().load(video.channelLogoUrl).into(binding.channelLogoImg);
         binding.videoTitleTxt.setText(video.title);

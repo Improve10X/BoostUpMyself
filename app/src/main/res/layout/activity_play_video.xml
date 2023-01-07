@@ -6,15 +6,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".PlayVideoActivity">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <com.google.android.youtube.player.YouTubePlayerView
-            android:id="@+id/youtube_player_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+                <com.google.android.youtube.player.YouTubePlayerView
+                    android:id="@+id/youtube_player_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
     </LinearLayout>
 
     <LinearLayout
@@ -36,15 +37,18 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:paddingLeft="4dp">
 
             <TextView
                 android:id="@+id/video_title_txt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="TextView"
+                android:textColor="#090808" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -55,17 +59,34 @@
                     android:id="@+id/channel_name_txt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="TextView" />
+                    android:text="TextView"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="top"
+                    android:text="." />
 
                 <TextView
                     android:id="@+id/uploaded_time_txt"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="TextView" />
+                    android:text="TextView"
+                    android:textSize="12sp" />
+
             </LinearLayout>
         </LinearLayout>
 
+        <ImageButton
+            android:id="@+id/save_image_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#FFFFFF"
+            android:src="@drawable/ic_baseline_bookmark_border_24" />
+
     </LinearLayout>
+
 </LinearLayout>
