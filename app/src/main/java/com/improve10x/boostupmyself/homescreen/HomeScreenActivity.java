@@ -135,7 +135,7 @@ public class HomeScreenActivity extends AppCompatActivity {
 
             @Override
             public void onItemSave(Video video) {
-               setSavedVideo(video);
+                setSavedVideo(video);
             }
         });
     }

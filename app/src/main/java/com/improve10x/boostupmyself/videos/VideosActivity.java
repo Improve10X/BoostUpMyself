@@ -54,7 +54,7 @@ public class VideosActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId() == android.R.id.home) {
+        if (item.getItemId() == android.R.id.home) {
             finish();
             return false;
         } else {
@@ -70,7 +70,7 @@ public class VideosActivity extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if(task.isSuccessful()) {
+                        if (task.isSuccessful()) {
                             List<Video> videos = task.getResult().toObjects(Video.class);
                             videoItemsAdapter.setData(videos);
                             Toast.makeText(VideosActivity.this, "Video Size : " + videos.size(), Toast.LENGTH_SHORT).show();
@@ -119,7 +119,7 @@ public class VideosActivity extends AppCompatActivity {
             public void onItemSave(Video video) {
                 setSavedVideo(video);
             }
-    });
+        });
     }
 
     private void setupCategoryNameRv() {
