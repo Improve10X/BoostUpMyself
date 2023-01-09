@@ -38,7 +38,6 @@ public class HomeScreenActivity extends BaseActivity {
     private ArrayList<Video> videoItems = new ArrayList<>();
     private ActivityHomeScreenBinding binding;
     private VideoItemsAdapter videoItemsAdapter;
-    private Video video;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
