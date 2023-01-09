@@ -34,7 +34,6 @@ public class CategoriesActivity extends BaseActivity {
     private ArrayList<Category> categories = new ArrayList<>();
     private ActivityCategoriesBinding binding;
     private CategoriesAdapter categoriesAdapter;
-    private Video video;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,9 +41,6 @@ public class CategoriesActivity extends BaseActivity {
         binding = ActivityCategoriesBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         getSupportActionBar().setTitle("Categories");
-        Intent intent = getIntent();
-        intent.hasExtra(Constants.CATEGORY_ID);
-        video = (Video) intent.getSerializableExtra(Constants.CATEGORY_ID);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getCategories();
         setupCategoriesAdapter();
@@ -53,7 +49,7 @@ public class CategoriesActivity extends BaseActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId() == android.R.id.home) {
+        if (item.getItemId() == android.R.id.home) {
             finish();
             return false;
         } else {
@@ -68,7 +64,7 @@ public class CategoriesActivity extends BaseActivity {
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if(task.isSuccessful()) {
+                        if (task.isSuccessful()) {
                             List<Category> categories = task.getResult().toObjects(Category.class);
                             categoriesAdapter.setData(categories);
                             showToast("Category Size : " + categories.size());
@@ -77,7 +73,7 @@ public class CategoriesActivity extends BaseActivity {
                         }
                     }
                 });
-            }
+    }
 
     public void setupCategoriesAdapter() {
         categoriesAdapter = new CategoriesAdapter();

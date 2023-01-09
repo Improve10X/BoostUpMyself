@@ -37,8 +37,8 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoryViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull CategoryViewHolder holder, int position) {
         Category category = categories.get(position);
-        Picasso.get().load(category.categoryImg).into(holder.categoriesItemBinding.categoryImg);
-        holder.categoriesItemBinding.categoryTitle.setText(category.categoryTitle);
+        Picasso.get().load(category.categoryImg).into(holder.binding.categoryImg);
+        holder.binding.categoryTitle.setText(category.categoryTitle);
         holder.itemView.setOnClickListener(view -> {
                 onItemActionListener.onItemClicked(category);
         });

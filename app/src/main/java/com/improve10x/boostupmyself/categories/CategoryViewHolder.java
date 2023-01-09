@@ -6,10 +6,10 @@ import com.improve10x.boostupmyself.databinding.CategoriesItemBinding;
 
 public class CategoryViewHolder extends RecyclerView.ViewHolder {
 
-    CategoriesItemBinding categoriesItemBinding;
+    CategoriesItemBinding binding;
 
     public CategoryViewHolder(CategoriesItemBinding categoriesItemBinding) {
         super(categoriesItemBinding.getRoot());
-        this.categoriesItemBinding = categoriesItemBinding;
+        binding = categoriesItemBinding;
     }
 }
