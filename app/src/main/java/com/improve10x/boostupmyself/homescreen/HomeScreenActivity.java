@@ -24,6 +24,7 @@ import com.improve10x.boostupmyself.Constants;
 import com.improve10x.boostupmyself.LoginActivity;
 import com.improve10x.boostupmyself.PlayVideoActivity;
 import com.improve10x.boostupmyself.SavedVideosActivity;
+import com.improve10x.boostupmyself.base.BaseActivity;
 import com.improve10x.boostupmyself.categories.CategoriesActivity;
 import com.improve10x.boostupmyself.R;
 import com.improve10x.boostupmyself.databinding.ActivityHomeScreenBinding;
@@ -32,7 +33,7 @@ import com.improve10x.boostupmyself.videos.VideosActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeScreenActivity extends AppCompatActivity {
+public class HomeScreenActivity extends BaseActivity {
 
     private ArrayList<Video> videoItems = new ArrayList<>();
     private ActivityHomeScreenBinding binding;
@@ -92,9 +93,9 @@ public class HomeScreenActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             List<Video> videos = task.getResult().toObjects(Video.class);
                             videoItemsAdapter.setData(videos);
-                            Toast.makeText(HomeScreenActivity.this, "Video Size : " + videos.size(), Toast.LENGTH_SHORT).show();
+                            showToast("Video Size : " + videos.size());
                         } else {
-                            Toast.makeText(HomeScreenActivity.this, "Failed to get data", Toast.LENGTH_SHORT).show();
+                            showToast("Failed to get data");
                         }
                     }
                 });
@@ -110,14 +111,14 @@ public class HomeScreenActivity extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        Toast.makeText(HomeScreenActivity.this, "Successfully added video", Toast.LENGTH_SHORT).show();
+                        showToast("Successfully added video");
                         getVideos();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(HomeScreenActivity.this, "Failed to add Video", Toast.LENGTH_SHORT).show();
+                        showToast("Failed to add Video");
                     }
                 });
     }
@@ -128,6 +129,7 @@ public class HomeScreenActivity extends AppCompatActivity {
         videoItemsAdapter.setOnItemActionListener(new OnItemActionListener() {
             @Override
             public void onItemClicked(Video video) {
+                showToast("Clicked");
                 Intent intent = new Intent(HomeScreenActivity.this, PlayVideoActivity.class);
                 intent.putExtra(Constants.HOME_SCREEN, video);
                 startActivity(intent);

@@ -17,6 +17,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.improve10x.boostupmyself.base.BaseActivity;
 import com.improve10x.boostupmyself.databinding.ActivitySavedVideosBinding;
 import com.improve10x.boostupmyself.homescreen.HomeScreenActivity;
 import com.improve10x.boostupmyself.homescreen.OnItemActionListener;
@@ -26,7 +27,7 @@ import com.improve10x.boostupmyself.homescreen.VideoItemsAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SavedVideosActivity extends AppCompatActivity {
+public class SavedVideosActivity extends BaseActivity {
 
     private ArrayList<Video> savedVideos = new ArrayList<>();
     private VideoItemsAdapter videoItemsAdapter;
@@ -69,9 +70,9 @@ public class SavedVideosActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             List<Video> videos = task.getResult().toObjects(Video.class);
                             videoItemsAdapter.setData(videos);
-                            Toast.makeText(SavedVideosActivity.this, "Video Size : " + videos.size(), Toast.LENGTH_SHORT).show();
+                            showToast("Video Size : " + videos.size());
                         } else {
-                            Toast.makeText(SavedVideosActivity.this, "Failed to get data", Toast.LENGTH_SHORT).show();
+                            showToast("Failed to get data");
                         }
                     }
                 });
@@ -83,7 +84,7 @@ public class SavedVideosActivity extends AppCompatActivity {
         videoItemsAdapter.setOnItemActionListener(new OnItemActionListener() {
             @Override
             public void onItemClicked(Video video) {
-                Toast.makeText(SavedVideosActivity.this, "Clicked", Toast.LENGTH_SHORT).show();
+                showToast("Failed to get data");
                 Intent intent = new Intent(SavedVideosActivity.this, PlayVideoActivity.class);
                 intent.putExtra(Constants.HOME_SCREEN, video);
                 startActivity(intent);

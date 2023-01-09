@@ -1,7 +1,6 @@
 package com.improve10x.boostupmyself.videos;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
@@ -19,10 +18,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.improve10x.boostupmyself.Constants;
 import com.improve10x.boostupmyself.PlayVideoActivity;
-import com.improve10x.boostupmyself.SavedVideosActivity;
+import com.improve10x.boostupmyself.base.BaseActivity;
 import com.improve10x.boostupmyself.categories.Category;
 import com.improve10x.boostupmyself.databinding.ActivityVideosBinding;
-import com.improve10x.boostupmyself.homescreen.HomeScreenActivity;
 import com.improve10x.boostupmyself.homescreen.OnItemActionListener;
 import com.improve10x.boostupmyself.homescreen.Video;
 import com.improve10x.boostupmyself.homescreen.VideoItemsAdapter;
@@ -30,7 +28,7 @@ import com.improve10x.boostupmyself.homescreen.VideoItemsAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VideosActivity extends AppCompatActivity {
+public class VideosActivity extends BaseActivity {
 
     public ArrayList<Video> videos = new ArrayList<>();
     private ActivityVideosBinding binding;
@@ -48,7 +46,7 @@ public class VideosActivity extends AppCompatActivity {
         category = (Category) intent.getSerializableExtra(Constants.CATEGORY_ID);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getVideos();
-        setupCategoryNamesAdapter();
+        setupVideoItemsAdapter();
         setupCategoryNameRv();
     }
 
@@ -73,9 +71,9 @@ public class VideosActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             List<Video> videos = task.getResult().toObjects(Video.class);
                             videoItemsAdapter.setData(videos);
-                            Toast.makeText(VideosActivity.this, "Video Size : " + videos.size(), Toast.LENGTH_SHORT).show();
+                            showToast("Video Size : " + videos.size());
                         } else {
-                            Toast.makeText(VideosActivity.this, "Failed to get data", Toast.LENGTH_SHORT).show();
+                            showToast("Failed to get data");
                         }
                     }
                 });
@@ -91,25 +89,25 @@ public class VideosActivity extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        Toast.makeText(VideosActivity.this, "Successfully added video", Toast.LENGTH_SHORT).show();
+                        showToast("Successfully added video");
                         getVideos();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(VideosActivity.this, "Failed to add Video", Toast.LENGTH_SHORT).show();
+                        showToast("Failed to add Video");
                     }
                 });
     }
 
-    private void setupCategoryNamesAdapter() {
+    private void setupVideoItemsAdapter() {
         videoItemsAdapter = new VideoItemsAdapter();
         videoItemsAdapter.setData(videos);
         videoItemsAdapter.setOnItemActionListener(new OnItemActionListener() {
             @Override
             public void onItemClicked(Video video) {
-                Toast.makeText(VideosActivity.this, "Clicked", Toast.LENGTH_SHORT).show();
+                showToast("Clicked");
                 Intent intent = new Intent(VideosActivity.this, PlayVideoActivity.class);
                 intent.putExtra(Constants.HOME_SCREEN, video);
                 startActivity(intent);

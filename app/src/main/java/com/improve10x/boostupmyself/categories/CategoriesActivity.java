@@ -14,6 +14,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.improve10x.boostupmyself.Constants;
+import com.improve10x.boostupmyself.base.BaseActivity;
 import com.improve10x.boostupmyself.databinding.ActivityCategoriesBinding;
 import com.improve10x.boostupmyself.api.VideoService;
 import com.improve10x.boostupmyself.api.VideosApi;
@@ -28,10 +29,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CategoriesActivity extends AppCompatActivity {
+public class CategoriesActivity extends BaseActivity {
 
     private ArrayList<Category> categories = new ArrayList<>();
-    ActivityCategoriesBinding binding;
+    private ActivityCategoriesBinding binding;
     private CategoriesAdapter categoriesAdapter;
     private Video video;
 
@@ -70,9 +71,9 @@ public class CategoriesActivity extends AppCompatActivity {
                         if(task.isSuccessful()) {
                             List<Category> categories = task.getResult().toObjects(Category.class);
                             categoriesAdapter.setData(categories);
-                            Toast.makeText(CategoriesActivity.this, "Category Size : " + categories.size(), Toast.LENGTH_SHORT).show();
+                            showToast("Category Size : " + categories.size());
                         } else {
-                            Toast.makeText(CategoriesActivity.this, "Failed to get data", Toast.LENGTH_SHORT).show();
+                            showToast("Failed to get data");
                         }
                     }
                 });
@@ -84,7 +85,7 @@ public class CategoriesActivity extends AppCompatActivity {
         categoriesAdapter.setOnItemActionListener(new OnItemActionListener() {
             @Override
             public void onItemClicked(Category category) {
-                Toast.makeText(CategoriesActivity.this, "Clicked", Toast.LENGTH_SHORT).show();
+                showToast("Clicked");
                 Intent intent = new Intent(CategoriesActivity.this, VideosActivity.class);
                 intent.putExtra(Constants.CATEGORY_ID, category);
                 startActivity(intent);
