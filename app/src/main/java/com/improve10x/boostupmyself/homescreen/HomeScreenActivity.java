@@ -122,6 +122,26 @@ public class HomeScreenActivity extends BaseActivity {
                 });
     }
 
+
+    private void getSavedVideos() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        db.collection("/users/" + user.getUid() + "/savedVideos")
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        showToast("Failed to get saved videos");
+                    }
+                });
+    }
+
     private void setupAdapter() {
         videoItemsAdapter = new VideoItemsAdapter();
         videoItemsAdapter.setData(videoItems);
