@@ -69,6 +69,9 @@ public class SavedVideosActivity extends BaseActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             List<Video> videos = task.getResult().toObjects(Video.class);
+                            for (int videosIndex = 0; videosIndex < videos.size(); videosIndex++) {
+                                videos.get(videosIndex).bookmark = true;
+                            }
                             videoItemsAdapter.setData(videos);
                             showToast("Video Size : " + videos.size());
                         } else {

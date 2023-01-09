@@ -1,6 +1,7 @@
 package com.improve10x.boostupmyself.homescreen;
 
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -49,8 +50,20 @@ public class VideoItemsAdapter extends RecyclerView.Adapter<VideoItemViewHolder>
         holder.itemView.setOnClickListener(view -> {
             onItemActionListener.onItemClicked(video);
         });
-        holder.binding.saveImgBtn.setOnClickListener(view -> {
+        if (video.bookmark != null && video.bookmark == true) {
+            holder.binding.saveImgBtn.setVisibility(View.VISIBLE);
+            holder.binding.unsaveImgBtn.setVisibility(View.GONE);
+        } else {
+            holder.binding.unsaveImgBtn.setVisibility(View.VISIBLE);
+            holder.binding.saveImgBtn.setVisibility(View.GONE);
+        }
+        holder.binding.unsaveImgBtn.setOnClickListener(view -> {
             onItemActionListener.onItemSave(video);
+
+
+        });
+        holder.binding.saveImgBtn.setOnClickListener(view -> {
+
         });
     }
 
