@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -60,6 +61,7 @@ public class SavedVideosActivity extends BaseActivity {
     }
 
     private void getVideos() {
+        showProgressBar();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         db.collection("/users/" + user.getUid() + "/savedVideos")
@@ -67,6 +69,7 @@ public class SavedVideosActivity extends BaseActivity {
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        hideProgressBar();
                         if (task.isSuccessful()) {
                             List<Video> videos = task.getResult().toObjects(Video.class);
                             for (int videosIndex = 0; videosIndex < videos.size(); videosIndex++) {
@@ -102,5 +105,13 @@ public class SavedVideosActivity extends BaseActivity {
     private void setupSavedVideosRv() {
         binding.savedVideosRv.setLayoutManager(new LinearLayoutManager(this));
         binding.savedVideosRv.setAdapter(videoItemsAdapter);
+    }
+
+    private void showProgressBar() {
+        binding.progress.setVisibility(View.VISIBLE);
+    }
+
+    private void hideProgressBar() {
+        binding.progress.setVisibility(View.GONE);
     }
 }
