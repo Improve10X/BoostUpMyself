@@ -1,15 +1,13 @@
 package com.improve10x.boostupmyself.homescreen;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageButton;
-import android.widget.Toast;
+import android.view.View;
 
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -28,7 +26,6 @@ import com.improve10x.boostupmyself.base.BaseActivity;
 import com.improve10x.boostupmyself.categories.CategoriesActivity;
 import com.improve10x.boostupmyself.R;
 import com.improve10x.boostupmyself.databinding.ActivityHomeScreenBinding;
-import com.improve10x.boostupmyself.videos.VideosActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,12 +80,14 @@ public class HomeScreenActivity extends BaseActivity {
     }
 
     private void getVideos() {
+        showProgressBar();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("videos")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        hideProgressBar();
                         if (task.isSuccessful()) {
                             List<Video> videos = task.getResult().toObjects(Video.class);
                             getSavedVideos(videos);
@@ -172,5 +171,13 @@ public class HomeScreenActivity extends BaseActivity {
     private void setupVideoItemRv() {
         binding.videoItemRv.setLayoutManager(new LinearLayoutManager(this));
         binding.videoItemRv.setAdapter(videoItemsAdapter);
+    }
+
+    private void showProgressBar() {
+        binding.progress.setVisibility(View.VISIBLE);
+    }
+
+    private void hideProgressBar() {
+        binding.progress.setVisibility(View.GONE);
     }
 }
