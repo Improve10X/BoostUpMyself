@@ -91,7 +91,7 @@ public class HomeScreenActivity extends BaseActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             List<Video> videos = task.getResult().toObjects(Video.class);
-                            videoItemsAdapter.setData(videos);
+                            getSavedVideos(videos);
                             showToast("Video Size : " + videos.size());
                         } else {
                             showToast("Failed to get data");
@@ -103,7 +103,6 @@ public class HomeScreenActivity extends BaseActivity {
     private void setSavedVideo(Video video) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        video.id = db.collection("/users/" + user.getUid() + "/savedVideos").document().getId();
         db.collection("/users/" + user.getUid() + "/savedVideos")
                 .document(video.id)
                 .set(video)
@@ -120,6 +119,35 @@ public class HomeScreenActivity extends BaseActivity {
                         showToast("Failed to add Video");
                     }
                 });
+    }
+
+
+    private void getSavedVideos(List<Video> videos) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        db.collection("/users/" + user.getUid() + "/savedVideos")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()) {
+                            List<Video> savedVideos = task.getResult().toObjects(Video.class);
+                            List<Video> updatedVideos = updateVideosWithBookmark(videos, savedVideos);
+                            videoItemsAdapter.setData(updatedVideos);
+                        }
+                    }
+                });
+    }
+
+    private List<Video> updateVideosWithBookmark(List<Video> videos, List<Video> savedVideos) {
+        for(int videosIndex = 0; videosIndex < videos.size(); videosIndex++) {
+          for(int savedVideosIndex = 0; savedVideosIndex < savedVideos.size(); savedVideosIndex++) {
+              if(videos.get(videosIndex).id.equals( savedVideos.get(savedVideosIndex).id)) {
+                  videos.get(videosIndex).bookmark = true;
+              }
+          }
+        }
+        return videos;
     }
 
     private void setupAdapter() {
