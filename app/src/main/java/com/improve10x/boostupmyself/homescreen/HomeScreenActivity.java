@@ -167,7 +167,7 @@ public class HomeScreenActivity extends BaseActivity {
 
             @Override
             public void onItemUnSave(Video video) {
-
+                getVideos();
             }
         });
     }
