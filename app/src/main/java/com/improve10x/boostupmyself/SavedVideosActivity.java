@@ -99,6 +99,10 @@ public class SavedVideosActivity extends BaseActivity {
             @Override
             public void onItemSave(Video video) {
             }
+
+            @Override
+            public void onItemUnSave(Video video) {
+            }
         });
     }
 
