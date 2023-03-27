@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -58,12 +59,14 @@ public class CategoriesActivity extends BaseActivity {
     }
 
     private void getCategories() {
+        showProgressBar();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("categories")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        hideProgressBar();
                         if (task.isSuccessful()) {
                             List<Category> categories = task.getResult().toObjects(Category.class);
                             categoriesAdapter.setData(categories);
@@ -92,5 +95,13 @@ public class CategoriesActivity extends BaseActivity {
 
     private void setupCategoriesRv() {
         binding.categoriesRv.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    private void showProgressBar() {
+        binding.progress.setVisibility(View.VISIBLE);
+    }
+
+    private void hideProgressBar() {
+        binding.progress.setVisibility(View.GONE);
     }
 }

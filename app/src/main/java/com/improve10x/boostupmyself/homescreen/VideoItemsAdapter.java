@@ -61,7 +61,7 @@ public class VideoItemsAdapter extends RecyclerView.Adapter<VideoItemViewHolder>
             onItemActionListener.onItemSave(video);
         });
         holder.binding.saveImgBtn.setOnClickListener(view -> {
-
+            onItemActionListener.onItemUnSave(video);
         });
     }
 

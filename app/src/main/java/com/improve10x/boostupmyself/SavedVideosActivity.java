@@ -48,6 +48,7 @@ public class SavedVideosActivity extends BaseActivity {
         getVideos();
         setupVideoItemsAdapter();
         setupSavedVideosRv();
+//        unSaveVideo(video.id);
     }
 
     @Override
@@ -84,6 +85,27 @@ public class SavedVideosActivity extends BaseActivity {
                 });
     }
 
+    private void unSaveVideo(String id) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        db.collection("/users/" + user.getUid() + "/savedVideos")
+                .document(id)
+                .delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                       showToast("Successfully unsaved video");
+                       finish();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        showToast("Failed to unsave the video");
+                    }
+                });
+    }
+
     private void setupVideoItemsAdapter() {
         videoItemsAdapter = new VideoItemsAdapter();
         videoItemsAdapter.setData(savedVideos);
@@ -98,6 +120,11 @@ public class SavedVideosActivity extends BaseActivity {
 
             @Override
             public void onItemSave(Video video) {
+            }
+
+            @Override
+            public void onItemUnSave(Video video) {
+                unSaveVideo(video.id);
             }
         });
     }

@@ -120,7 +120,6 @@ public class HomeScreenActivity extends BaseActivity {
                 });
     }
 
-
     private void getSavedVideos(List<Video> videos) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -129,7 +128,7 @@ public class HomeScreenActivity extends BaseActivity {
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if(task.isSuccessful()) {
+                        if (task.isSuccessful()) {
                             List<Video> savedVideos = task.getResult().toObjects(Video.class);
                             List<Video> updatedVideos = updateVideosWithBookmark(videos, savedVideos);
                             videoItemsAdapter.setData(updatedVideos);
@@ -139,12 +138,12 @@ public class HomeScreenActivity extends BaseActivity {
     }
 
     private List<Video> updateVideosWithBookmark(List<Video> videos, List<Video> savedVideos) {
-        for(int videosIndex = 0; videosIndex < videos.size(); videosIndex++) {
-          for(int savedVideosIndex = 0; savedVideosIndex < savedVideos.size(); savedVideosIndex++) {
-              if(videos.get(videosIndex).id.equals( savedVideos.get(savedVideosIndex).id)) {
-                  videos.get(videosIndex).bookmark = true;
-              }
-          }
+        for (int videosIndex = 0; videosIndex < videos.size(); videosIndex++) {
+            for (int savedVideosIndex = 0; savedVideosIndex < savedVideos.size(); savedVideosIndex++) {
+                if (videos.get(videosIndex).id.equals(savedVideos.get(savedVideosIndex).id)) {
+                    videos.get(videosIndex).bookmark = true;
+                }
+            }
         }
         return videos;
     }
@@ -164,6 +163,11 @@ public class HomeScreenActivity extends BaseActivity {
             @Override
             public void onItemSave(Video video) {
                 setSavedVideo(video);
+            }
+
+            @Override
+            public void onItemUnSave(Video video) {
+                getVideos();
             }
         });
     }

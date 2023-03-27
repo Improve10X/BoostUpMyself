@@ -120,6 +120,11 @@ public class VideosActivity extends BaseActivity {
             public void onItemSave(Video video) {
                 setSavedVideo(video);
             }
+
+            @Override
+            public void onItemUnSave(Video video) {
+
+            }
         });
     }
 

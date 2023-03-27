@@ -5,4 +5,6 @@ public interface OnItemActionListener {
     void onItemClicked(Video video);
 
     void onItemSave(Video video);
+
+    void onItemUnSave(Video video);
 }
