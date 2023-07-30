@@ -49,7 +49,8 @@
             android:paddingTop="4dp"
             android:text="Title"
             android:textColor="#050505"
-            app:layout_constraintEnd_toStartOf="@+id/save_img_btn"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/cardView"
             app:layout_constraintTop_toBottomOf="@+id/video_img" />
 
@@ -88,22 +89,36 @@
             android:id="@+id/save_img_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
             android:layout_marginEnd="12dp"
             android:background="#FFFEFE"
             app:layout_constraintBottom_toBottomOf="@+id/video_title_txt"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/video_title_txt"
             app:layout_constraintTop_toBottomOf="@+id/video_img"
             app:srcCompat="@drawable/ic_baseline_bookmark_24" />
 
         <ImageButton
             android:id="@+id/unsave_img_btn"
+            android:layout_width="33dp"
+            android:layout_height="31dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="#FFFFFF"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/video_title_txt"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/video_title_txt"
+            app:layout_constraintTop_toBottomOf="@+id/video_img"
+            app:srcCompat="@drawable/ic_baseline_bookmark_border_24" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="#FFFFFF"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/video_title_txt"
-            app:srcCompat="@drawable/ic_baseline_bookmark_border_24" />
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="371dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
