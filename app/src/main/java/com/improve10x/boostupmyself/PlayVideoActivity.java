@@ -43,7 +43,7 @@ public class PlayVideoActivity extends YouTubeBaseActivity {
     }
 
     private void setupWebView() {
-        String video = "<iframe width=\"100%\" height=\"100%\" src=\"https://youtu.be/bz7yYu_w2HY\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>";
+        String video = "<iframe width=\"100%\" height=\"100%\" src=\"https://youtu.be/s5BMcaQsjbM\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>";
         binding.webview.getSettings().setJavaScriptEnabled(true);
         binding.webview.setWebChromeClient(new WebChromeClient());
         binding.webview.loadUrl(video);
