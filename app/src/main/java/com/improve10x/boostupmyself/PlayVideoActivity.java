@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.webkit.WebChromeClient;
+import android.webkit.WebView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -36,10 +38,18 @@ public class PlayVideoActivity extends YouTubeBaseActivity {
         intent.hasExtra(Constants.HOME_SCREEN);
         video = (Video) intent.getSerializableExtra(Constants.HOME_SCREEN);
         showData();
-        setupYouTubePlayerView();
+        setupWebView();
+       // setupYouTubePlayerView();
     }
 
-    private void setupYouTubePlayerView() {
+    private void setupWebView() {
+        String video = "<iframe width=\"100%\" height=\"100%\" src=\"https://youtu.be/bz7yYu_w2HY\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>";
+        binding.webview.getSettings().setJavaScriptEnabled(true);
+        binding.webview.setWebChromeClient(new WebChromeClient());
+        binding.webview.loadUrl(video);
+    }
+
+    /*private void setupYouTubePlayerView() {
         binding.youtubePlayerView.initialize(Constants.YOUTUBE_API_KEY, new YouTubePlayer.OnInitializedListener() {
             @Override
             public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
@@ -52,7 +62,7 @@ public class PlayVideoActivity extends YouTubeBaseActivity {
                 Toast.makeText(PlayVideoActivity.this, "Fail to load video", Toast.LENGTH_SHORT).show();
             }
         });
-    }
+    }*/
 
     private void showData() {
         Picasso.get().load(video.channelLogoUrl).into(binding.channelLogoImg);
