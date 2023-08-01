@@ -38,15 +38,18 @@ public class PlayVideoActivity extends YouTubeBaseActivity {
         intent.hasExtra(Constants.HOME_SCREEN);
         video = (Video) intent.getSerializableExtra(Constants.HOME_SCREEN);
         showData();
-        setupWebView();
-       // setupYouTubePlayerView();
+        setupWebView(video.youtubeVideoId);
+        // setupYouTubePlayerView();
     }
 
-    private void setupWebView() {
-        String video = "<iframe width=\"100%\" height=\"100%\" src=\"https://youtu.be/s5BMcaQsjbM\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>";
+    private void setupWebView(String id) {
+        String videos = "<iframe id='player' type='text/html' width='100%' height='100%'\n" +
+                "  src='http://www.youtube.com/embed/"+id+"?enablejsapi=1&origin=http://boostupmyself.improve10x.com'\n" +
+                "  frameborder='0'></iframe>";
         binding.webview.getSettings().setJavaScriptEnabled(true);
         binding.webview.setWebChromeClient(new WebChromeClient());
-        binding.webview.loadUrl(video);
+        binding.webview.loadData(videos, "text/html", "utf-8");
+
     }
 
     /*private void setupYouTubePlayerView() {
