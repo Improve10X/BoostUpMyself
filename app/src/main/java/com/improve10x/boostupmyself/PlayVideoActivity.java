@@ -45,7 +45,7 @@ public class PlayVideoActivity extends YouTubeBaseActivity {
     private void setupWebView(String id) {
         String videos = "<iframe id='player' type='text/html' width='100%' height='100%'\n" +
                 "  src='http://www.youtube.com/embed/"+id+"?enablejsapi=1&origin=http://boostupmyself.improve10x.com'\n" +
-                "  frameborder='0'></iframe>";
+                "  frameborder='0'allowfullscreen='allowfullscreen'></iframe>";
         binding.webview.getSettings().setJavaScriptEnabled(true);
         binding.webview.setWebChromeClient(new WebChromeClient());
         binding.webview.loadData(videos, "text/html", "utf-8");
