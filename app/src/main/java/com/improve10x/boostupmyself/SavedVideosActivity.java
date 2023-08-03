@@ -92,16 +92,22 @@ public class SavedVideosActivity extends BaseActivity {
                 .document(id)
                 .delete()
                 .addOnSuccessListener(unused -> {
-                    showToast("Successfully Un save the video");
+                    showToast("Successfully unsave the video");
                     getVideos();
                 })
 
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        showToast("Failed to unsave the video");
+                        showToast("Failed to unsave video");
                     }
                 });
+//                .addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//                        showToast("Failed to unsave the video");
+//                    }
+//                });
     }
 
     private void setupVideoItemsAdapter() {

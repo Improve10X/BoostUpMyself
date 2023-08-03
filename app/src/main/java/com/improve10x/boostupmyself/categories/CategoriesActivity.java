@@ -17,8 +17,6 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.improve10x.boostupmyself.Constants;
 import com.improve10x.boostupmyself.base.BaseActivity;
 import com.improve10x.boostupmyself.databinding.ActivityCategoriesBinding;
-import com.improve10x.boostupmyself.api.VideoService;
-import com.improve10x.boostupmyself.api.VideosApi;
 import com.improve10x.boostupmyself.homescreen.HomeScreenActivity;
 import com.improve10x.boostupmyself.homescreen.Video;
 import com.improve10x.boostupmyself.videos.VideosActivity;

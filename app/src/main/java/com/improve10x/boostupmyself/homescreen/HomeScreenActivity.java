@@ -108,14 +108,14 @@ public class HomeScreenActivity extends BaseActivity {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        showToast("Successfully added video");
+                        showToast("Successfully save video");
                         getVideos();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        showToast("Failed to add Video");
+                        showToast("Failed to save Video");
                     }
                 });
     }
