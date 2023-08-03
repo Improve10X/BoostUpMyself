@@ -92,7 +92,7 @@ public class VideosActivity extends BaseActivity {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        showToast("Successfully added video");
+                        showToast("Successfully save video");
                         getVideos();
                     }
                 })
