@@ -177,6 +177,12 @@ public class HomeScreenActivity extends BaseActivity {
         binding.videoItemRv.setAdapter(videoItemsAdapter);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getVideos();
+    }
+
     private void showProgressBar() {
         binding.progress.setVisibility(View.VISIBLE);
     }
