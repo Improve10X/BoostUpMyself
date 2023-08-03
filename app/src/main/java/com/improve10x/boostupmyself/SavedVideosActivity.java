@@ -91,13 +91,11 @@ public class SavedVideosActivity extends BaseActivity {
         db.collection("/users/" + user.getUid() + "/savedVideos")
                 .document(id)
                 .delete()
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                       showToast("Successfully unsaved video");
-                       finish();
-                    }
+                .addOnSuccessListener(unused -> {
+                    showToast("Successfully Un save the video");
+                    getVideos();
                 })
+
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
