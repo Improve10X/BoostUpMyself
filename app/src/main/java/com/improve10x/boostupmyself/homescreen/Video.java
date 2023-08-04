@@ -13,7 +13,7 @@ public class Video implements Serializable {
     public String channelName;
     public String channelLogoUrl;
     public String youtubeVideoId;
-    public Boolean bookmark;
+    public boolean bookmark;
 
     public Video() {
     }
