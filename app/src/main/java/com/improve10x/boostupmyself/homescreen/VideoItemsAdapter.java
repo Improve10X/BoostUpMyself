@@ -50,7 +50,7 @@ public class VideoItemsAdapter extends RecyclerView.Adapter<VideoItemViewHolder>
         holder.itemView.setOnClickListener(view -> {
             onItemActionListener.onItemClicked(video);
         });
-        if (video.bookmark != null && video.bookmark == true) {
+        if (video.bookmark != false && video.bookmark == true) {
             holder.binding.saveImgBtn.setVisibility(View.VISIBLE);
             holder.binding.unsaveImgBtn.setVisibility(View.GONE);
         } else {
